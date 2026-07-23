@@ -73,43 +73,43 @@ export default function HospitalDetailPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
 
-          <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 sm:gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-1.5 sm:mb-2 flex-wrap">
                 {hospital.hasEmergency && (
-                  <span className="px-3 py-1 rounded-full bg-red-600 text-white text-xs font-bold flex items-center gap-1 shadow-lg">
+                  <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-red-600 text-white text-[10px] sm:text-xs font-bold flex items-center gap-1 shadow-lg">
                     <AlertCircle className="w-3.5 h-3.5" />
                     24/7 EMERGENCY DEPT
                   </span>
                 )}
-                <span className="px-3 py-1 rounded-full bg-slate-900/80 text-amber-400 border border-amber-500/30 text-xs font-bold flex items-center gap-1 backdrop-blur-md">
+                <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-slate-900/80 text-amber-400 border border-amber-500/30 text-[10px] sm:text-xs font-bold flex items-center gap-1 backdrop-blur-md">
                   <Star className="w-3.5 h-3.5 fill-current" />
                   {hospital.rating} ({hospital.reviewCount} Reviews)
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-white">{hospital.name}</h1>
-              <p className="text-sm text-slate-300 flex items-center gap-1.5 mt-1">
-                <MapPin className="w-4 h-4 text-sky-400" />
-                {hospital.address}, {hospital.city}, {hospital.state} {hospital.zip}
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-white leading-tight">{hospital.name}</h1>
+              <p className="text-xs sm:text-sm text-slate-300 flex items-center gap-1.5 mt-1">
+                <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <span className="truncate">{hospital.address}, {hospital.city}, {hospital.state} {hospital.zip}</span>
               </p>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => toggleFavorite(hospital.id)}
-                className={`p-3 rounded-2xl border transition-all ${
+                className={`p-2.5 sm:p-3 rounded-2xl border transition-all ${
                   favorite
                     ? 'bg-red-500/20 border-red-500 text-red-400'
                     : 'bg-slate-900/80 border-slate-700 text-slate-300 hover:text-white'
                 }`}
               >
-                <Heart className={`w-5 h-5 ${favorite ? 'fill-current' : ''}`} />
+                <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${favorite ? 'fill-current' : ''}`} />
               </button>
 
               <button
                 onClick={() => router.push('/navigation')}
-                className="px-5 py-3 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold shadow-lg shadow-sky-600/30 flex items-center gap-2"
+                className="flex-1 sm:flex-initial px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2"
               >
                 <Navigation className="w-4 h-4" />
                 Start Turn-by-Turn Navigation
@@ -119,10 +119,10 @@ export default function HospitalDetailPage() {
         </div>
       </div>
 
-      <div className="flex border-b border-slate-800 gap-4 text-sm font-bold">
+      <div className="flex border-b border-slate-800 gap-2 sm:gap-4 text-xs sm:text-sm font-bold overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('OVERVIEW')}
-          className={`pb-3 border-b-2 transition-colors ${
+          className={`pb-2.5 border-b-2 transition-colors whitespace-nowrap ${
             activeTab === 'OVERVIEW' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400 hover:text-white'
           }`}
         >
@@ -130,7 +130,7 @@ export default function HospitalDetailPage() {
         </button>
         <button
           onClick={() => setActiveTab('DOCTORS')}
-          className={`pb-3 border-b-2 transition-colors ${
+          className={`pb-2.5 border-b-2 transition-colors whitespace-nowrap ${
             activeTab === 'DOCTORS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400 hover:text-white'
           }`}
         >
@@ -138,7 +138,7 @@ export default function HospitalDetailPage() {
         </button>
         <button
           onClick={() => setActiveTab('REVIEWS')}
-          className={`pb-3 border-b-2 transition-colors ${
+          className={`pb-2.5 border-b-2 transition-colors whitespace-nowrap ${
             activeTab === 'REVIEWS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400 hover:text-white'
           }`}
         >

@@ -119,15 +119,15 @@ export default function HomePage() {
             Enterprise Healthcare Directory & Turn-by-Turn GPS Guidance
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
             Discover Nearby Hospitals & Get <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">Fastest Turn-by-Turn Directions</span>
           </h1>
 
-          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
             Real-time emergency bed availability, specialized medical departments, verified doctor rosters, and instant route optimization.
           </p>
 
-          <div className="max-w-4xl mx-auto bg-slate-900/90 border border-slate-800 p-3 sm:p-4 rounded-2xl shadow-2xl space-y-3">
+          <div className="max-w-4xl mx-auto bg-slate-900/90 border border-slate-800 p-3.5 sm:p-5 rounded-2xl shadow-2xl space-y-3.5">
             
             <div className="flex flex-col sm:flex-row items-center gap-3">
               
@@ -138,7 +138,7 @@ export default function HomePage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search by hospital name, city, or medical specialty..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
                 />
               </div>
 
@@ -153,43 +153,43 @@ export default function HomePage() {
 
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
-              <div className="flex flex-wrap items-center gap-2">
-                <button
-                  onClick={() => setEmergencyOnly(!emergencyOnly)}
-                  className={`px-3 py-1.5 rounded-lg border font-semibold transition-all flex items-center gap-1.5 ${
-                    emergencyOnly
-                      ? 'bg-red-600 text-white border-red-500 shadow-lg shadow-red-600/20'
-                      : 'bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700'
-                  }`}
-                >
-                  <AlertCircle className="w-3.5 h-3.5" />
-                  🚨 24/7 Emergency Available
-                </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-3 border-t border-slate-800/80 text-xs">
+              <button
+                onClick={() => setEmergencyOnly(!emergencyOnly)}
+                className={`w-full px-3 py-2 rounded-xl border font-semibold transition-all flex items-center justify-center gap-1.5 ${
+                  emergencyOnly
+                    ? 'bg-red-600 text-white border-red-500 shadow-lg shadow-red-600/20'
+                    : 'bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700'
+                }`}
+              >
+                <AlertCircle className="w-3.5 h-3.5" />
+                🚨 24/7 Emergency Available
+              </button>
 
-                <select
-                  value={selectedCity}
-                  onChange={(e) => setSelectedCity(e.target.value)}
-                  className="bg-slate-950 text-slate-300 text-xs font-semibold py-1.5 px-3 rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
-                >
-                  <option value="ALL">All Cities</option>
-                  <option value="Metropolis">Metropolis</option>
-                  <option value="Brooklyn">Brooklyn</option>
-                  <option value="Queens">Queens</option>
-                </select>
+              <select
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+                className="w-full bg-slate-950 text-slate-300 text-xs font-semibold py-2 px-3 rounded-xl border border-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+              >
+                <option value="ALL">All Cities</option>
+                <option value="Metropolis">Metropolis</option>
+                <option value="Brooklyn">Brooklyn</option>
+                <option value="Queens">Queens</option>
+              </select>
 
-                <select
-                  value={selectedDepartment}
-                  onChange={(e) => setSelectedDepartment(e.target.value)}
-                  className="bg-slate-950 text-slate-300 text-xs font-semibold py-1.5 px-3 rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
-                >
-                  <option value="ALL">All Specialties</option>
-                  {INITIAL_DEPARTMENTS.map((dept) => (
-                    <option key={dept.id} value={dept.name}>{dept.name}</option>
-                  ))}
-                </select>
-              </div>
+              <select
+                value={selectedDepartment}
+                onChange={(e) => setSelectedDepartment(e.target.value)}
+                className="w-full bg-slate-950 text-slate-300 text-xs font-semibold py-2 px-3 rounded-xl border border-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+              >
+                <option value="ALL">All Specialties</option>
+                {INITIAL_DEPARTMENTS.map((dept) => (
+                  <option key={dept.id} value={dept.name}>{dept.name}</option>
+                ))}
+              </select>
+            </div>
 
+            <div className="text-center pt-1">
               <span className="text-slate-500 font-medium text-[11px]">
                 {locationStatus}
               </span>
@@ -203,7 +203,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
               <HeartPulse className="w-5 h-5 text-sky-400" />
               Browse by Specialty Department
             </h2>
@@ -211,18 +211,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
           {INITIAL_DEPARTMENTS.map((dept) => (
             <button
               key={dept.id}
               onClick={() => setSelectedDepartment(selectedDepartment === dept.name ? 'ALL' : dept.name)}
-              className={`p-3.5 rounded-2xl border text-left transition-all ${
+              className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all ${
                 selectedDepartment === dept.name
                   ? 'bg-sky-950/80 border-sky-500 text-sky-300 shadow-lg'
                   : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
               }`}
             >
-              <h4 className="font-bold text-sm text-slate-100 mb-1">{dept.name}</h4>
+              <h4 className="font-bold text-xs sm:text-sm text-slate-100 mb-1">{dept.name}</h4>
               <p className="text-[10px] text-slate-400 line-clamp-2">{dept.description}</p>
             </button>
           ))}
@@ -232,14 +232,14 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
-            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
               <Building2 className="w-6 h-6 text-sky-400" />
               Verified Nearby Hospitals ({filteredHospitals.length})
             </h2>
             <p className="text-xs text-slate-400">Sorted by radial GPS proximity and user rating</p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex items-center gap-2 text-xs flex-wrap">
             <span className="text-slate-400 font-medium">Min Rating:</span>
             {[0, 4, 4.5, 4.8].map((star) => (
               <button
@@ -268,7 +268,7 @@ export default function HomePage() {
             ))}
           </div>
         ) : (
-          <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-12 text-center space-y-3">
+          <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 sm:p-12 text-center space-y-3">
             <AlertCircle className="w-10 h-10 text-slate-600 mx-auto" />
             <h3 className="text-lg font-bold text-white">No Hospitals Match Current Filters</h3>
             <p className="text-xs text-slate-400 max-w-sm mx-auto">
@@ -291,9 +291,9 @@ export default function HomePage() {
       </section>
 
       <section id="interactive-map-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
               <MapPin className="w-5 h-5 text-sky-400" />
               Live Interactive Map & Route Preview
             </h2>
@@ -302,14 +302,14 @@ export default function HomePage() {
 
           <button
             onClick={() => router.push('/navigation')}
-            className="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 bg-sky-950/60 px-3 py-1.5 rounded-lg border border-sky-800/40"
+            className="self-start sm:self-auto text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 bg-sky-950/60 px-3 py-1.5 rounded-lg border border-sky-800/40"
           >
             Launch Fullscreen Map
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="h-[500px] w-full">
+        <div className="h-[360px] sm:h-[460px] lg:h-[550px] w-full">
           <DynamicMap
             hospitals={filteredHospitals}
             userLocation={userLocation}

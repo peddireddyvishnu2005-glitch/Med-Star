@@ -141,49 +141,49 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="bg-slate-900 border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
           <p className="text-xs text-slate-400 font-semibold">Total Hospitals</p>
-          <p className="text-2xl font-extrabold text-white mt-1">{hospitals.length}</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-white mt-1">{hospitals.length}</p>
         </div>
-        <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
-          <p className="text-xs text-slate-400 font-semibold">Total Active Specialists</p>
-          <p className="text-2xl font-extrabold text-sky-400 mt-1">{doctors.length}</p>
+        <div className="bg-slate-900 border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+          <p className="text-xs text-slate-400 font-semibold">Total Specialists</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-sky-400 mt-1">{doctors.length}</p>
         </div>
-        <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
-          <p className="text-xs text-slate-400 font-semibold">Available Emergency Beds</p>
-          <p className="text-2xl font-extrabold text-emerald-400 mt-1">
+        <div className="bg-slate-900 border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+          <p className="text-xs text-slate-400 font-semibold">Emergency Beds</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-emerald-400 mt-1">
             {hospitals.reduce((acc, h) => acc + h.availableEmergencyBeds, 0)}
           </p>
         </div>
-        <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <div className="bg-slate-900 border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
           <p className="text-xs text-slate-400 font-semibold">Audit Stream Logs</p>
-          <p className="text-2xl font-extrabold text-amber-400 mt-1">{auditLogs.length}</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-amber-400 mt-1">{auditLogs.length}</p>
         </div>
       </div>
 
-      <div className="flex border-b border-slate-800 gap-4 text-xs font-bold">
+      <div className="flex border-b border-slate-800 gap-2 sm:gap-4 text-xs font-bold overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('HOSPITALS')}
-          className={`pb-3 border-b-2 ${activeTab === 'HOSPITALS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
+          className={`pb-2.5 border-b-2 whitespace-nowrap ${activeTab === 'HOSPITALS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
         >
           Hospital Management ({hospitals.length})
         </button>
         <button
           onClick={() => setActiveTab('DOCTORS')}
-          className={`pb-3 border-b-2 ${activeTab === 'DOCTORS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
+          className={`pb-2.5 border-b-2 whitespace-nowrap ${activeTab === 'DOCTORS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
         >
           Doctor Rosters ({doctors.length})
         </button>
         <button
           onClick={() => setActiveTab('NOTIFICATIONS')}
-          className={`pb-3 border-b-2 ${activeTab === 'NOTIFICATIONS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
+          className={`pb-2.5 border-b-2 whitespace-nowrap ${activeTab === 'NOTIFICATIONS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
         >
           FCM Broadcast Notifications
         </button>
         <button
           onClick={() => setActiveTab('AUDIT')}
-          className={`pb-3 border-b-2 ${activeTab === 'AUDIT' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
+          className={`pb-2.5 border-b-2 whitespace-nowrap ${activeTab === 'AUDIT' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400'}`}
         >
           System Audit Logs ({auditLogs.length})
         </button>
@@ -191,7 +191,7 @@ export default function AdminDashboardPage() {
 
       {activeTab === 'HOSPITALS' && (
         <div className="space-y-6">
-          <form onSubmit={handleAddHospital} className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-4">
+          <form onSubmit={handleAddHospital} className="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl space-y-4">
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <Plus className="w-4 h-4 text-sky-400" />
               Register New Hospital Record
@@ -230,7 +230,7 @@ export default function AdminDashboardPage() {
             </button>
           </form>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-300">
               <thead className="bg-slate-950 text-slate-400 uppercase font-semibold border-b border-slate-800">
                 <tr>

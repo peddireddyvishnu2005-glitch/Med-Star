@@ -83,19 +83,19 @@ export default function NavigationPage() {
         onNavigate={handleSelectHospital}
       />
 
-      <div className="absolute top-4 left-4 z-40 max-w-sm w-full space-y-3">
-        <div className="bg-slate-900/90 backdrop-blur-md border border-slate-800 p-4 rounded-2xl shadow-2xl">
-          <h2 className="text-sm font-bold text-white flex items-center gap-2 mb-2">
+      <div className="absolute top-3 left-3 right-3 sm:right-auto sm:top-4 sm:left-4 z-40 max-w-sm w-auto space-y-3">
+        <div className="bg-slate-900/90 backdrop-blur-md border border-slate-800 p-3 sm:p-4 rounded-2xl shadow-2xl">
+          <h2 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-2">
             <Compass className="w-4 h-4 text-sky-400" />
             Select Destination Hospital
           </h2>
 
-          <div className="space-y-2 max-h-44 overflow-y-auto pr-1">
+          <div className="space-y-1.5 max-h-36 sm:max-h-44 overflow-y-auto pr-1">
             {INITIAL_HOSPITALS.map((hosp) => (
               <button
                 key={hosp.id}
                 onClick={() => handleSelectHospital(hosp)}
-                className={`w-full p-2.5 rounded-xl border text-left text-xs transition-all flex items-center justify-between ${
+                className={`w-full p-2 sm:p-2.5 rounded-xl border text-left text-xs transition-all flex items-center justify-between ${
                   selectedHospital.id === hosp.id
                     ? 'bg-sky-950/80 border-sky-500 text-sky-300 font-bold'
                     : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'
@@ -106,7 +106,7 @@ export default function NavigationPage() {
                   <p className="text-[10px] text-slate-400">{hosp.city} • {calculateHaversineDistance(userLocation.lat, userLocation.lng, hosp.lat, hosp.lng)} km away</p>
                 </div>
                 {hosp.hasEmergency && (
-                  <span className="bg-red-600/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                  <span className="bg-red-600/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shrink-0">
                     ER
                   </span>
                 )}
@@ -117,7 +117,7 @@ export default function NavigationPage() {
       </div>
 
       {isNavigating && activeRoute && (
-        <div className="absolute bottom-6 right-6 z-40">
+        <div className="absolute bottom-3 left-3 right-3 sm:left-auto sm:bottom-6 sm:right-6 z-40 max-w-md">
           <NavigationDrawer
             hospital={selectedHospital}
             routeInfo={activeRoute}

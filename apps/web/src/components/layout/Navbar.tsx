@@ -149,48 +149,63 @@ export default function Navbar() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+        <div className="md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-2">
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800"
+            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              isActive('/') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
+            }`}
           >
+            <Building2 className="w-4 h-4 text-sky-400" />
             Discover Hospitals
           </Link>
           <Link
             href="/navigation"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800"
+            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              isActive('/navigation') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
+            }`}
           >
+            <MapPin className="w-4 h-4 text-sky-400" />
             Live Map & Routing
           </Link>
           <Link
             href="/favorites"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800"
+            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              isActive('/favorites') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
+            }`}
           >
+            <Heart className="w-4 h-4 text-red-400" />
             Favorites
           </Link>
           <Link
             href="/history"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-sm text-slate-200 hover:bg-slate-800"
+            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              isActive('/history') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
+            }`}
           >
+            <History className="w-4 h-4 text-sky-400" />
             Navigation History
           </Link>
           {(role === 'ADMIN' || role === 'SUPER_ADMIN') && (
             <Link
               href="/admin"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm text-emerald-400 hover:bg-emerald-950/30"
+              className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                isActive('/admin') ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/30' : 'text-emerald-400 hover:bg-emerald-950/30'
+              }`}
             >
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
               Admin Dashboard
             </Link>
           )}
 
-          <div className="pt-3 border-t border-slate-800">
-            <p className="text-xs text-slate-400 mb-2">Switch Active Role:</p>
-            <div className="flex flex-wrap gap-2">
+          <div className="pt-4 border-t border-slate-800 space-y-2">
+            <p className="text-xs font-semibold text-slate-400">Switch Active Role:</p>
+            <div className="grid grid-cols-2 gap-2">
               {(['GUEST', 'USER', 'ADMIN', 'SUPER_ADMIN'] as UserRole[]).map((r) => (
                 <button
                   key={r}
@@ -198,11 +213,11 @@ export default function Navbar() {
                     loginAs(r);
                     setMobileMenuOpen(false);
                   }}
-                  className={`px-3 py-1 text-xs rounded-md font-medium border ${
-                    role === r ? 'bg-sky-600 text-white border-sky-500' : 'bg-slate-800 text-slate-300 border-slate-700'
+                  className={`px-3 py-2 text-xs rounded-xl font-bold border transition-all ${
+                    role === r ? 'bg-sky-600 text-white border-sky-500 shadow-md shadow-sky-600/20' : 'bg-slate-900 text-slate-300 border-slate-800 hover:bg-slate-800'
                   }`}
                 >
-                  {r}
+                  {r === 'SUPER_ADMIN' ? 'Super Admin' : r}
                 </button>
               ))}
             </div>
