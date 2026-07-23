@@ -15,31 +15,36 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(() => {
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Restore user session from localStorage safely on client mount
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('medstart_user');
       if (saved) {
         try {
-          return JSON.parse(saved);
-        } catch {
-          return null;
+          setUser(JSON.parse(saved));
+        } catch (e) {
+          console.error('Failed to parse saved user profile:', e);
         }
       }
+      setIsInitialized(true);
     }
-    return null;
-  });
+  }, []);
 
-  const role: UserRole = user?.role || 'GUEST';
-
+  // Sync state changes to localStorage
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (isInitialized && typeof window !== 'undefined') {
       if (user) {
         localStorage.setItem('medstart_user', JSON.stringify(user));
       } else {
         localStorage.removeItem('medstart_user');
       }
     }
-  }, [user]);
+  }, [user, isInitialized]);
+
+  const role: UserRole = user?.role || 'GUEST';
 
   const loginAs = (targetRole: UserRole, emailInput?: string) => {
     const newUser: UserProfile = {
