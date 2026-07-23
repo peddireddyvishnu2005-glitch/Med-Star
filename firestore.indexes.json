@@ -1,0 +1,29 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "hospitals",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "hasEmergency", "order": "DESCENDING" },
+        { "fieldPath": "rating", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "hospitals",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "city", "order": "ASCENDING" },
+        { "fieldPath": "rating", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "doctors",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "hospitalId", "order": "ASCENDING" },
+        { "fieldPath": "specialty", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
