@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Hospital } from '@/types';
@@ -50,6 +50,19 @@ export default function LeafletMapContainer({
   onSelectHospital,
   onNavigate
 }: LeafletMapProps) {
+  const mapWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (mapWrapperRef.current) {
+        const leafletContainer = mapWrapperRef.current.querySelector('.leaflet-container');
+        if (leafletContainer) {
+          delete (leafletContainer as any)._leaflet_id;
+        }
+      }
+    };
+  }, []);
+
   const defaultCenter: [number, number] = userLocation
     ? [userLocation.lat, userLocation.lng]
     : selectedHospital
@@ -57,8 +70,12 @@ export default function LeafletMapContainer({
     : [40.7128, -74.0060];
 
   return (
-    <div className="w-full h-full min-h-[400px] relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50">
+    <div
+      ref={mapWrapperRef}
+      className="w-full h-full min-h-[400px] relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50"
+    >
       <MapContainer
+        key={`${defaultCenter[0]}-${defaultCenter[1]}`}
         center={defaultCenter}
         zoom={13}
         scrollWheelZoom={true}
