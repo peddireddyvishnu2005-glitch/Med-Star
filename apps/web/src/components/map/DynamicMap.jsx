@@ -2,16 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import React from 'react';
-import { Hospital } from '@/types';
-
-interface LeafletMapProps {
-  hospitals: Hospital[];
-  userLocation: { lat: number; lng: number } | null;
-  selectedHospital: Hospital | null;
-  routeGeometry: [number, number][] | null;
-  onSelectHospital: (hosp: Hospital) => void;
-  onNavigate: (hosp: Hospital) => void;
-}
 
 const LeafletMapContainer = dynamic(
   () => import('./LeafletMapContainer'),
@@ -28,6 +18,6 @@ const LeafletMapContainer = dynamic(
   }
 );
 
-export default function DynamicMap(props: LeafletMapProps) {
+export default function DynamicMap(props) {
   return <LeafletMapContainer {...props} />;
 }

@@ -3,25 +3,17 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Hospital } from '@/types';
 import { useAuth } from '@/context/AuthContext';
 import { 
   MapPin, 
-  Phone, 
   Heart, 
   Navigation, 
   Star, 
   AlertCircle, 
-  Clock, 
   Bed 
 } from 'lucide-react';
 
-interface HospitalCardProps {
-  hospital: Hospital;
-  onNavigate: (hosp: Hospital) => void;
-}
-
-export default function HospitalCard({ hospital, onNavigate }: HospitalCardProps) {
+export default function HospitalCard({ hospital, onNavigate }) {
   const { toggleFavorite, isFavorite } = useAuth();
   const favorite = isFavorite(hospital.id);
 

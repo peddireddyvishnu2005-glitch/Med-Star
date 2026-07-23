@@ -3,31 +3,25 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { INITIAL_HOSPITALS, INITIAL_DOCTORS, INITIAL_AUDIT_LOGS } from '@/lib/mockData';
-import { Hospital, Doctor, SystemAuditLog } from '@/types';
 import { 
   ShieldCheck, 
-  Building2, 
-  UserCheck, 
-  FileText, 
   Plus, 
   Trash2, 
-  Edit3, 
   Bell, 
-  Bed, 
+  FileText, 
   CheckCircle2, 
-  AlertTriangle,
   Lock
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
   const { role, user } = useAuth();
   
-  const [hospitals, setHospitals] = useState<Hospital[]>(INITIAL_HOSPITALS);
-  const [doctors, setDoctors] = useState<Doctor[]>(INITIAL_DOCTORS);
-  const [auditLogs, setAuditLogs] = useState<SystemAuditLog[]>(INITIAL_AUDIT_LOGS);
+  const [hospitals, setHospitals] = useState(INITIAL_HOSPITALS);
+  const [doctors, setDoctors] = useState(INITIAL_DOCTORS);
+  const [auditLogs, setAuditLogs] = useState(INITIAL_AUDIT_LOGS);
 
-  const [activeTab, setActiveTab] = useState<'HOSPITALS' | 'DOCTORS' | 'NOTIFICATIONS' | 'AUDIT'>('HOSPITALS');
-  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('HOSPITALS');
+  const [statusMessage, setStatusMessage] = useState(null);
 
   // New Hospital Form State
   const [newHospName, setNewHospName] = useState('');
@@ -51,11 +45,11 @@ export default function AdminDashboardPage() {
     );
   }
 
-  const handleAddHospital = (e: React.FormEvent) => {
+  const handleAddHospital = (e) => {
     e.preventDefault();
     if (!newHospName.trim()) return;
 
-    const newHosp: Hospital = {
+    const newHosp = {
       id: `hosp-${Date.now()}`,
       name: newHospName,
       slug: newHospName.toLowerCase().replace(/\s+/g, '-'),
@@ -83,7 +77,7 @@ export default function AdminDashboardPage() {
     setHospitals([...hospitals, newHosp]);
 
     // Log Audit
-    const log: SystemAuditLog = {
+    const log = {
       id: `audit-${Date.now()}`,
       action: 'CREATE_HOSPITAL',
       performedBy: user?.email || 'admin@medstart.org',
@@ -98,11 +92,11 @@ export default function AdminDashboardPage() {
     setTimeout(() => setStatusMessage(null), 3000);
   };
 
-  const handleDeleteHospital = (id: string) => {
+  const handleDeleteHospital = (id) => {
     const hosp = hospitals.find(h => h.id === id);
     setHospitals(hospitals.filter(h => h.id !== id));
 
-    const log: SystemAuditLog = {
+    const log = {
       id: `audit-${Date.now()}`,
       action: 'DELETE_HOSPITAL',
       performedBy: user?.email || 'admin@medstart.org',
@@ -113,7 +107,7 @@ export default function AdminDashboardPage() {
     setAuditLogs([log, ...auditLogs]);
   };
 
-  const handleSendNotification = (e: React.FormEvent) => {
+  const handleSendNotification = (e) => {
     e.preventDefault();
     if (!notifTitle.trim() || !notifBody.trim()) return;
 

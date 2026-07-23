@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import HospitalCard from '@/components/hospital/HospitalCard';
 import { INITIAL_HOSPITALS } from '@/lib/mockData';
-import { Heart, Building2 } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export default function FavoritesPage() {
   const router = useRouter();

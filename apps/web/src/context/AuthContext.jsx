@@ -1,21 +1,11 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { UserProfile, UserRole } from '@/types';
 
-interface AuthContextType {
-  user: UserProfile | null;
-  role: UserRole;
-  loginAs: (role: UserRole, email?: string) => void;
-  logout: () => void;
-  toggleFavorite: (hospitalId: string) => void;
-  isFavorite: (hospitalId: string) => boolean;
-}
+const AuthContext = createContext(undefined);
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(() => {
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('medstart_user');
       if (saved) {
@@ -29,7 +19,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return null;
   });
 
-  const role: UserRole = user?.role || 'GUEST';
+  const role = user?.role || 'GUEST';
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -41,8 +31,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [user]);
 
-  const loginAs = (targetRole: UserRole, emailInput?: string) => {
-    const newUser: UserProfile = {
+  const loginAs = (targetRole, emailInput) => {
+    const newUser = {
       uid: `usr-${Date.now()}`,
       email: emailInput || (targetRole === 'ADMIN' ? 'admin@medstart.org' : targetRole === 'SUPER_ADMIN' ? 'superadmin@medstart.org' : 'patient@example.com'),
       displayName: targetRole === 'ADMIN' ? 'Dr. Sarah Lawson (Admin)' : targetRole === 'SUPER_ADMIN' ? 'System Administrator' : 'John Doe (Patient)',
@@ -58,7 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
-  const toggleFavorite = (hospitalId: string) => {
+  const toggleFavorite = (hospitalId) => {
     if (!user) {
       // Auto sign-in as registered user if guest clicks favorite
       loginAs('USER');
@@ -75,7 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const isFavorite = (hospitalId: string): boolean => {
+  const isFavorite = (hospitalId) => {
     return user?.favorites.includes(hospitalId) || false;
   };
 

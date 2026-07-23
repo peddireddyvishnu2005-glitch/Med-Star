@@ -1,9 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateHospitalDto } from './dto/create-hospital.dto';
 
 @Injectable()
 export class HospitalsService {
-  private hospitals = [
+  hospitals = [
     {
       id: 'hosp-101',
       name: 'Metropolis General Hospital',
@@ -28,7 +27,7 @@ export class HospitalsService {
     }
   ];
 
-  findAll(city?: string, emergencyOnly?: boolean) {
+  findAll(city, emergencyOnly) {
     let result = this.hospitals;
     if (city && city !== 'ALL') {
       result = result.filter(h => h.city.toLowerCase() === city.toLowerCase());
@@ -39,7 +38,7 @@ export class HospitalsService {
     return result;
   }
 
-  findOne(id: string) {
+  findOne(id) {
     const hospital = this.hospitals.find(h => h.id === id);
     if (!hospital) {
       throw new NotFoundException(`Hospital with ID ${id} not found`);
@@ -47,7 +46,7 @@ export class HospitalsService {
     return hospital;
   }
 
-  create(dto: CreateHospitalDto) {
+  create(dto) {
     const newHosp = {
       id: `hosp-${Date.now()}`,
       slug: dto.name.toLowerCase().replace(/\s+/g, '-'),
@@ -61,7 +60,7 @@ export class HospitalsService {
     return newHosp;
   }
 
-  remove(id: string) {
+  remove(id) {
     const index = this.hospitals.findIndex(h => h.id === id);
     if (index === -1) {
       throw new NotFoundException(`Hospital with ID ${id} not found`);

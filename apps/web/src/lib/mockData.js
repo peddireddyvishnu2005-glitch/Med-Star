@@ -1,6 +1,4 @@
-import { Hospital, Doctor, Department, HospitalReview, SystemAuditLog } from '@/types';
-
-export const INITIAL_DEPARTMENTS: Department[] = [
+export const INITIAL_DEPARTMENTS = [
   { id: 'dept-1', name: 'Emergency & Trauma', description: '24/7 critical care, resuscitation, and urgent trauma surgery', icon: 'AlertTriangle' },
   { id: 'dept-2', name: 'Cardiology', description: 'Advanced cardiovascular diagnosis, catheterization, and open-heart surgery', icon: 'HeartPulse' },
   { id: 'dept-3', name: 'Pediatrics', description: 'Comprehensive child healthcare, neonatal ICU, and pediatric surgery', icon: 'Baby' },
@@ -9,7 +7,7 @@ export const INITIAL_DEPARTMENTS: Department[] = [
   { id: 'dept-6', name: 'Oncology', description: 'Radiation therapy, chemotherapy, and surgical oncology treatments', icon: 'ShieldAlert' },
 ];
 
-export const INITIAL_HOSPITALS: Hospital[] = [
+export const INITIAL_HOSPITALS = [
   {
     id: 'hosp-101',
     name: 'Metropolis General Hospital',
@@ -117,7 +115,7 @@ export const INITIAL_HOSPITALS: Hospital[] = [
   }
 ];
 
-export const INITIAL_DOCTORS: Doctor[] = [
+export const INITIAL_DOCTORS = [
   {
     id: 'doc-201',
     hospitalId: 'hosp-101',
@@ -159,7 +157,7 @@ export const INITIAL_DOCTORS: Doctor[] = [
   }
 ];
 
-export const INITIAL_REVIEWS: HospitalReview[] = [
+export const INITIAL_REVIEWS = [
   {
     id: 'rev-301',
     hospitalId: 'hosp-101',
@@ -180,7 +178,7 @@ export const INITIAL_REVIEWS: HospitalReview[] = [
   }
 ];
 
-export const INITIAL_AUDIT_LOGS: SystemAuditLog[] = [
+export const INITIAL_AUDIT_LOGS = [
   {
     id: 'audit-1',
     action: 'UPDATE_BED_COUNT',

@@ -3,10 +3,9 @@
 import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import { Hospital } from '@/types';
 
 // Custom Map Markers Icons
-const createCustomIcon = (color: string, isEmergency: boolean = false) => {
+const createCustomIcon = (color, isEmergency = false) => {
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}" width="36" height="36">
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -26,21 +25,12 @@ const userIcon = createCustomIcon('#0284c7');
 const hospitalIcon = createCustomIcon('#059669');
 const emergencyHospitalIcon = createCustomIcon('#dc2626', true);
 
-function ChangeView({ center }: { center: [number, number] }) {
+function ChangeView({ center }) {
   const map = useMap();
   useEffect(() => {
     map.setView(center, 13, { animate: true });
   }, [center, map]);
   return null;
-}
-
-interface LeafletMapProps {
-  hospitals: Hospital[];
-  userLocation: { lat: number; lng: number } | null;
-  selectedHospital: Hospital | null;
-  routeGeometry: [number, number][] | null;
-  onSelectHospital: (hosp: Hospital) => void;
-  onNavigate: (hosp: Hospital) => void;
 }
 
 export default function LeafletMapContainer({
@@ -50,8 +40,8 @@ export default function LeafletMapContainer({
   routeGeometry,
   onSelectHospital,
   onNavigate
-}: LeafletMapProps) {
-  const defaultCenter: [number, number] = userLocation
+}) {
+  const defaultCenter = userLocation
     ? [userLocation.lat, userLocation.lng]
     : selectedHospital
     ? [selectedHospital.lat, selectedHospital.lng]

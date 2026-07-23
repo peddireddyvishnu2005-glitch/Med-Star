@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Hospital, RouteInfo } from '@/types';
 import { 
-  Navigation, 
   Clock, 
   MapPin, 
   ArrowUpRight, 
@@ -14,22 +12,15 @@ import {
   X 
 } from 'lucide-react';
 
-interface NavigationDrawerProps {
-  hospital: Hospital;
-  routeInfo: RouteInfo;
-  onClose: () => void;
-  onCompleteNavigation: () => void;
-}
-
 export default function NavigationDrawer({
   hospital,
   routeInfo,
   onClose,
   onCompleteNavigation
-}: NavigationDrawerProps) {
-  const [routeMode, setRouteMode] = useState<'FASTEST' | 'SHORTEST'>('FASTEST');
+}) {
+  const [routeMode, setRouteMode] = useState('FASTEST');
 
-  const renderStepIcon = (iconType: string) => {
+  const renderStepIcon = (iconType) => {
     switch (iconType) {
       case 'turn-right':
         return <CornerUpRight className="w-5 h-5 text-sky-400 shrink-0" />;

@@ -5,23 +5,22 @@ import DynamicMap from '@/components/map/DynamicMap';
 import NavigationDrawer from '@/components/navigation/NavigationDrawer';
 import { INITIAL_HOSPITALS } from '@/lib/mockData';
 import { calculateHaversineDistance, generateRouteGeometry } from '@/lib/geoUtils';
-import { Hospital, RouteInfo, RouteHistoryItem } from '@/types';
-import { MapPin, Navigation, Compass, AlertCircle, PhoneCall, CheckCircle } from 'lucide-react';
+import { Compass, CheckCircle } from 'lucide-react';
 
 export default function NavigationPage() {
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number }>({
+  const [userLocation, setUserLocation] = useState({
     lat: 40.7128,
     lng: -74.0060
   });
 
-  const [selectedHospital, setSelectedHospital] = useState<Hospital>(INITIAL_HOSPITALS[0]);
-  const [activeRoute, setActiveRoute] = useState<RouteInfo | null>(() => {
+  const [selectedHospital, setSelectedHospital] = useState(INITIAL_HOSPITALS[0]);
+  const [activeRoute, setActiveRoute] = useState(() => {
     return generateRouteGeometry(40.7128, -74.0060, INITIAL_HOSPITALS[0].lat, INITIAL_HOSPITALS[0].lng);
   });
-  const [isNavigating, setIsNavigating] = useState<boolean>(true);
-  const [notification, setNotification] = useState<string | null>(null);
+  const [isNavigating, setIsNavigating] = useState(true);
+  const [notification, setNotification] = useState(null);
 
-  const handleSelectHospital = (hosp: Hospital) => {
+  const handleSelectHospital = (hosp) => {
     setSelectedHospital(hosp);
     const route = generateRouteGeometry(userLocation.lat, userLocation.lng, hosp.lat, hosp.lng);
     setActiveRoute(route);
@@ -32,7 +31,7 @@ export default function NavigationPage() {
     if (!activeRoute) return;
     
     // Save route history log to local storage
-    const newLog: RouteHistoryItem = {
+    const newLog = {
       id: `route-${Date.now()}`,
       hospitalId: selectedHospital.id,
       hospitalName: selectedHospital.name,

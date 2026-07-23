@@ -5,18 +5,12 @@ import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { INITIAL_HOSPITALS, INITIAL_DOCTORS, INITIAL_REVIEWS } from '@/lib/mockData';
 import { useAuth } from '@/context/AuthContext';
-import { HospitalReview } from '@/types';
 import { 
-  Building2, 
   MapPin, 
-  Phone, 
   AlertCircle, 
   Star, 
   Heart, 
   Navigation, 
-  UserCheck, 
-  Bed, 
-  Clock, 
   Stethoscope,
   MessageSquarePlus,
   ArrowLeft
@@ -27,24 +21,24 @@ export default function HospitalDetailPage() {
   const router = useRouter();
   const { toggleFavorite, isFavorite, user } = useAuth();
 
-  const hospitalId = params.id as string;
+  const hospitalId = params.id;
   const hospital = INITIAL_HOSPITALS.find((h) => h.id === hospitalId) || INITIAL_HOSPITALS[0];
   const doctors = INITIAL_DOCTORS.filter((d) => d.hospitalId === hospital.id);
 
-  const [reviews, setReviews] = useState<HospitalReview[]>(INITIAL_REVIEWS.filter(r => r.hospitalId === hospital.id));
-  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'DOCTORS' | 'REVIEWS'>('OVERVIEW');
+  const [reviews, setReviews] = useState(INITIAL_REVIEWS.filter(r => r.hospitalId === hospital.id));
+  const [activeTab, setActiveTab] = useState('OVERVIEW');
 
   // Review Form state
-  const [newReviewRating, setNewReviewRating] = useState<number>(5);
-  const [newReviewComment, setNewReviewComment] = useState<string>('');
+  const [newReviewRating, setNewReviewRating] = useState(5);
+  const [newReviewComment, setNewReviewComment] = useState('');
 
   const favorite = isFavorite(hospital.id);
 
-  const handleAddReview = (e: React.FormEvent) => {
+  const handleAddReview = (e) => {
     e.preventDefault();
     if (!newReviewComment.trim()) return;
 
-    const review: HospitalReview = {
+    const review = {
       id: `rev-${Date.now()}`,
       hospitalId: hospital.id,
       userId: user?.uid || 'usr-guest',

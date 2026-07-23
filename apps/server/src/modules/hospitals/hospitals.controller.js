@@ -6,30 +6,36 @@ import { CreateHospitalDto } from './dto/create-hospital.dto';
 @ApiTags('Hospitals')
 @Controller('api/v1/hospitals')
 export class HospitalsController {
-  constructor(private readonly hospitalsService: HospitalsService) {}
+  static get inject() {
+    return [HospitalsService];
+  }
+
+  constructor(hospitalsService) {
+    this.hospitalsService = hospitalsService;
+  }
 
   @Get()
   @ApiOperation({ summary: 'List all verified hospitals with optional filters' })
   @ApiResponse({ status: 200, description: 'List of hospitals returned successfully.' })
-  findAll(@Query('city') city?: string, @Query('emergencyOnly') emergencyOnly?: boolean) {
+  findAll(@Query('city') city, @Query('emergencyOnly') emergencyOnly) {
     return this.hospitalsService.findAll(city, emergencyOnly);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get detailed hospital profile by ID' })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id) {
     return this.hospitalsService.findOne(id);
   }
 
   @Post()
   @ApiOperation({ summary: 'Create new hospital record (Admin Privileges Required)' })
-  create(@Body() createHospitalDto: CreateHospitalDto) {
+  create(@Body() createHospitalDto) {
     return this.hospitalsService.create(createHospitalDto);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete hospital record (Admin Privileges Required)' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id) {
     return this.hospitalsService.remove(id);
   }
 }

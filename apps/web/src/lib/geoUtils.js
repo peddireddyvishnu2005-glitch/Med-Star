@@ -1,14 +1,7 @@
-import { NavigationStep, RouteInfo } from '@/types';
-
 /**
  * Haversine formula to calculate radial distance between two GPS coordinates in kilometers.
  */
-export function calculateHaversineDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number
-): number {
+export function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Earth's radius in km
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLon = ((lon2 - lon1) * Math.PI) / 180;
@@ -26,19 +19,14 @@ export function calculateHaversineDistance(
 /**
  * Generate simulated turn-by-turn route geometry and instruction steps for navigation demo.
  */
-export function generateRouteGeometry(
-  startLat: number,
-  startLng: number,
-  destLat: number,
-  destLng: number
-): RouteInfo {
+export function generateRouteGeometry(startLat, startLng, destLat, destLng) {
   const distance = calculateHaversineDistance(startLat, startLng, destLat, destLng);
   // Estimate driving time assuming average urban speed of 35 km/h
   const durationMins = Math.max(3, Math.round((distance / 35) * 60));
 
   // Generate intermediate polyline waypoints between start and destination
   const stepsCount = 6;
-  const geometry: [number, number][] = [];
+  const geometry = [];
 
   for (let i = 0; i <= stepsCount; i++) {
     const ratio = i / stepsCount;
@@ -51,7 +39,7 @@ export function generateRouteGeometry(
     geometry.push([waypointLat, waypointLng]);
   }
 
-  const steps: NavigationStep[] = [
+  const steps = [
     {
       instruction: 'Head North towards the main boulevard',
       distance: `${Math.round(distance * 0.15 * 1000)} m`,

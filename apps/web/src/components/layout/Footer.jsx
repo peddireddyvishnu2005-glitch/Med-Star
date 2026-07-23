@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Building2, ShieldAlert, Heart, Phone, Mail, MapPin } from 'lucide-react';
+import { Building2, ShieldAlert, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (

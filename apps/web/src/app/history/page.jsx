@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { RouteHistoryItem } from '@/types';
-import { History, MapPin, Clock, Navigation, Trash2 } from 'lucide-react';
+import { History, Trash2 } from 'lucide-react';
 
 export default function HistoryPage() {
-  const [history, setHistory] = useState<RouteHistoryItem[]>([]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

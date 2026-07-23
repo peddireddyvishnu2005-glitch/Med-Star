@@ -12,19 +12,16 @@ import {
   ShieldCheck, 
   LogOut, 
   LogIn, 
-  UserCheck, 
-  AlertCircle,
   Menu,
   X
 } from 'lucide-react';
-import { UserRole } from '@/types';
 
 export default function Navbar() {
   const pathname = usePathname();
   const { user, role, loginAs, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path) => pathname === path;
 
   return (
     <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80">
@@ -41,7 +38,7 @@ export default function Navbar() {
                 MedStart
               </span>
               <span className="hidden sm:inline-block ml-2 text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                Enterprise
+                Enterprise JS
               </span>
             </div>
           </Link>
@@ -107,7 +104,7 @@ export default function Navbar() {
               <span className="text-[11px] text-slate-400 font-semibold uppercase">Role:</span>
               <select
                 value={role}
-                onChange={(e) => loginAs(e.target.value as UserRole)}
+                onChange={(e) => loginAs(e.target.value)}
                 className="bg-slate-950 text-xs text-sky-300 font-bold py-1 px-2 rounded border border-slate-700 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
               >
                 <option value="GUEST">Guest</option>
@@ -198,7 +195,7 @@ export default function Navbar() {
           <div className="pt-3 border-t border-slate-800">
             <p className="text-xs text-slate-400 mb-2">Switch Active Role:</p>
             <div className="flex flex-wrap gap-2">
-              {(['GUEST', 'USER', 'ADMIN', 'SUPER_ADMIN'] as UserRole[]).map((r) => (
+              {['GUEST', 'USER', 'ADMIN', 'SUPER_ADMIN'].map((r) => (
                 <button
                   key={r}
                   onClick={() => {

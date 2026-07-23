@@ -6,16 +6,12 @@ import DynamicMap from '@/components/map/DynamicMap';
 import HospitalCard from '@/components/hospital/HospitalCard';
 import { INITIAL_HOSPITALS, INITIAL_DEPARTMENTS } from '@/lib/mockData';
 import { calculateHaversineDistance, generateRouteGeometry } from '@/lib/geoUtils';
-import { Hospital, RouteInfo } from '@/types';
 import { 
   Search, 
   MapPin, 
   AlertCircle, 
-  Filter, 
-  SlidersHorizontal, 
   Building2, 
   HeartPulse, 
-  ShieldCheck, 
   Sparkles,
   Compass,
   ArrowRight
@@ -26,22 +22,22 @@ export default function HomePage() {
 
   // Search & Filter State
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCity, setSelectedCity] = useState<string>('ALL');
-  const [selectedDepartment, setSelectedDepartment] = useState<string>('ALL');
-  const [emergencyOnly, setEmergencyOnly] = useState<boolean>(false);
-  const [minRating, setMinRating] = useState<number>(0);
+  const [selectedCity, setSelectedCity] = useState('ALL');
+  const [selectedDepartment, setSelectedDepartment] = useState('ALL');
+  const [emergencyOnly, setEmergencyOnly] = useState(false);
+  const [minRating, setMinRating] = useState(0);
 
   // GPS Location State
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>({
+  const [userLocation, setUserLocation] = useState({
     lat: 40.7128,
     lng: -74.0060 // Default Metropolis/NY GPS center
   });
-  const [isLocating, setIsLocating] = useState<boolean>(false);
-  const [locationStatus, setLocationStatus] = useState<string>('Metropolis, NY (Default)');
+  const [isLocating, setIsLocating] = useState(false);
+  const [locationStatus, setLocationStatus] = useState('Metropolis, NY (Default)');
 
   // Map & Route selection state
-  const [selectedHospital, setSelectedHospital] = useState<Hospital | null>(INITIAL_HOSPITALS[0]);
-  const [activeRoute, setActiveRoute] = useState<RouteInfo | null>(null);
+  const [selectedHospital, setSelectedHospital] = useState(INITIAL_HOSPITALS[0]);
+  const [activeRoute, setActiveRoute] = useState(null);
 
   // Trigger HTML5 Geolocation API
   const handleDetectLocation = () => {
@@ -100,7 +96,7 @@ export default function HomePage() {
   }, [hospitalsWithDistance, searchQuery, selectedCity, selectedDepartment, emergencyOnly, minRating]);
 
   // Handle direct navigation trigger
-  const handleNavigate = (hosp: Hospital) => {
+  const handleNavigate = (hosp) => {
     const startLat = userLocation ? userLocation.lat : 40.7306;
     const startLng = userLocation ? userLocation.lng : -73.9352;
     const route = generateRouteGeometry(startLat, startLng, hosp.lat, hosp.lng);
