@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import Navbar from '@/components/layout/Navbar';
@@ -8,8 +8,14 @@ export const metadata: Metadata = {
   title: 'MedStart — Enterprise Hospital Finder & Turn-by-Turn Navigation Platform',
   description: 'Intelligent Hospital Finder, Real-Time Emergency Availability, and Turn-by-Turn Navigation Platform.',
   manifest: '/manifest.json',
+};
+
+export const viewport: Viewport = {
   themeColor: '#0284c7',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
