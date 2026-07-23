@@ -14,26 +14,32 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const safeJsonParse = <T,>(value: string | null): T | null => {
+  if (!value || typeof value !== 'string' || !value.trim() || value === 'undefined' || value === 'null') {
+    return null;
+  }
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return null;
+  }
+};
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Restore user session from localStorage safely on client mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('medstart_user');
-      if (saved) {
-        try {
-          setUser(JSON.parse(saved));
-        } catch (e) {
-          console.error('Failed to parse saved user profile:', e);
-        }
+      const parsedUser = safeJsonParse<UserProfile>(saved);
+      if (parsedUser) {
+        setUser(parsedUser);
       }
       setIsInitialized(true);
     }
   }, []);
 
-  // Sync state changes to localStorage
   useEffect(() => {
     if (isInitialized && typeof window !== 'undefined') {
       if (user) {
@@ -80,7 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const isFavorite = (hospitalId: string): boolean => {
-    return user?.favorites.includes(hospitalId) || false;
+    return user?.favorites?.includes(hospitalId) || false;
   };
 
   return (

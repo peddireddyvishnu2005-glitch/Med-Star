@@ -44,7 +44,19 @@ export default function NavigationPage() {
       timestamp: new Date().toISOString()
     };
 
-    const existingLogs = JSON.parse(localStorage.getItem('medstart_route_history') || '[]');
+    let existingLogs: RouteHistoryItem[] = [];
+    try {
+      const saved = localStorage.getItem('medstart_route_history');
+      if (saved && saved.trim() && saved !== 'undefined' && saved !== 'null') {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          existingLogs = parsed;
+        }
+      }
+    } catch (e) {
+      console.error('Failed to parse history:', e);
+    }
+
     localStorage.setItem('medstart_route_history', JSON.stringify([newLog, ...existingLogs]));
 
     setNotification(`Navigation session logged successfully! Saved to history.`);

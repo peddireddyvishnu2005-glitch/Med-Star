@@ -10,11 +10,14 @@ export default function HistoryPage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('medstart_route_history');
-      if (saved) {
+      if (saved && saved.trim() && saved !== 'undefined' && saved !== 'null') {
         try {
-          setHistory(JSON.parse(saved));
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setHistory(parsed);
+          }
         } catch (e) {
-          console.error(e);
+          console.error('Failed to parse navigation history:', e);
         }
       }
     }
