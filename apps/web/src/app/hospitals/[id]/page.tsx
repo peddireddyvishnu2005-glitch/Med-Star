@@ -55,6 +55,7 @@ export default function HospitalDetailPage() {
       rating: newReviewRating,
       comment: newReviewComment,
       createdAt: new Date().toISOString(),
+      verified: true,
     };
 
     setReviews([review, ...reviews]);

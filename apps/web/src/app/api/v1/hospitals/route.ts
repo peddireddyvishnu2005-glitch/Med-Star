@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { INITIAL_HOSPITALS } from "@/lib/mockData";
 import { Hospital } from "@/types";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
@@ -73,6 +75,14 @@ export async function POST(request: NextRequest) {
       hasEmergency: body.hasEmergency ?? true,
       availableEmergencyBeds: body.availableEmergencyBeds || 10,
       totalEmergencyBeds: body.totalEmergencyBeds || 20,
+      availableIcuBeds: body.availableIcuBeds || 5,
+      totalIcuBeds: body.totalIcuBeds || 10,
+      bloodBankStock: body.bloodBankStock || { "A+": 10, "O+": 15 },
+      hasPharmacy: body.hasPharmacy ?? true,
+      hasOperationTheatre: body.hasOperationTheatre ?? true,
+      isWheelchairAccessible: body.isWheelchairAccessible ?? true,
+      hasParking: body.hasParking ?? true,
+      insuranceAccepted: body.insuranceAccepted || ["BlueCross", "Medicare"],
       lat: body.lat || 40.7128,
       lng: body.lng || -74.006,
       rating: 5.0,
@@ -82,6 +92,7 @@ export async function POST(request: NextRequest) {
       ],
       departments: body.departments || ["Emergency & Trauma"],
       operatingHours: "24/7 Open",
+      isVerified: true,
       status: "ACTIVE",
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),

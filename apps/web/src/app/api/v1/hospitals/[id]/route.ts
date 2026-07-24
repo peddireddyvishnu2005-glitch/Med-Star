@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { INITIAL_HOSPITALS, INITIAL_DOCTORS, INITIAL_REVIEWS } from "@/lib/mockData";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

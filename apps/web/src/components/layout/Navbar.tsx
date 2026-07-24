@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -14,7 +14,18 @@ import {
   LogIn, 
   Menu, 
   X,
-  Stethoscope
+  Stethoscope,
+  User,
+  UserCheck,
+  Siren,
+  Bot,
+  Pill,
+  TestTube,
+  GitCompare,
+  Calendar,
+  ChevronDown,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 import { UserRole } from '@/types';
 
@@ -22,114 +33,298 @@ export default function Navbar() {
   const pathname = usePathname();
   const { user, role, loginAs, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path: string) => pathname === path || (path !== '/' && pathname.startsWith(path));
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close dropdown on route change
+  useEffect(() => {
+    setDropdownOpen(false);
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl">
+    <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-3">
+        <div className="flex items-center justify-between h-16 gap-4">
 
-          {/* Logo Section */}
+          {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-cyan-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-cyan-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
               <Building2 className="w-5 h-5 text-white" />
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-white via-sky-100 to-sky-400 bg-clip-text text-transparent tracking-tight">
+              <span className="text-xl font-extrabold bg-gradient-to-r from-white via-sky-100 to-sky-400 bg-clip-text text-transparent tracking-tight">
                 MedStart
               </span>
-              <span className="hidden xl:inline-block text-[9px] uppercase font-extrabold tracking-widest px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/30">
-                ENTERPRISE
+              <span className="text-[10px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/30">
+                PRO V2
               </span>
             </div>
           </Link>
 
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5 shrink-0">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1.5 shrink-0">
             <Link
               href="/"
-              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                isActive('/') 
+              className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
+                pathname === '/' 
                   ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
               }`}
             >
-              <Building2 className="w-4 h-4 text-sky-400 shrink-0" />
-              <span>Discover</span>
+              <Building2 className="w-4 h-4 text-sky-400" />
+              <span>Hospitals</span>
             </Link>
 
             <Link
               href="/navigation"
-              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
                 isActive('/navigation') 
                   ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
               }`}
             >
-              <MapPin className="w-4 h-4 text-sky-400 shrink-0" />
+              <MapPin className="w-4 h-4 text-sky-400" />
               <span>Live Map</span>
             </Link>
 
             <Link
               href="/specialties"
-              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                isActive('/specialties') || pathname.startsWith('/specialties')
+              className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
+                isActive('/specialties') 
                   ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
               }`}
             >
-              <Stethoscope className="w-4 h-4 text-emerald-400 shrink-0" />
+              <Stethoscope className="w-4 h-4 text-emerald-400" />
               <span>Specialties</span>
             </Link>
 
-            <Link
-              href="/favorites"
-              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                isActive('/favorites') 
-                  ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
-                  : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
-              }`}
+            {/* Healthcare Hub Mega Dropdown */}
+            <div 
+              className="relative group" 
+              ref={dropdownRef}
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
             >
-              <Heart className="w-4 h-4 text-red-400 shrink-0" />
-              <span>Favorites</span>
-            </Link>
-
-            <Link
-              href="/history"
-              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                isActive('/history') 
-                  ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
-                  : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
-              }`}
-            >
-              <History className="w-4 h-4 text-sky-400 shrink-0" />
-              <span>History</span>
-            </Link>
-
-            {(role === 'ADMIN' || role === 'SUPER_ADMIN') && (
-              <Link
-                href="/admin"
-                className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                  isActive('/admin') 
-                    ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/40 shadow-sm shadow-emerald-500/10' 
-                    : 'text-emerald-400 hover:bg-emerald-950/30'
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                suppressHydrationWarning
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 border ${
+                  dropdownOpen || isActive('/patient') || isActive('/doctors') || isActive('/appointments') || isActive('/ai-assistant') || isActive('/pharmacy') || isActive('/labs') || isActive('/compare') || isActive('/hospital/dashboard')
+                    ? 'bg-sky-600/20 text-sky-300 border-sky-500/40 shadow-lg shadow-sky-500/10'
+                    : 'bg-slate-900/60 text-slate-200 border-slate-800 hover:bg-slate-900 hover:text-white'
                 }`}
               >
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Admin</span>
-              </Link>
+                <Sparkles className="w-4 h-4 text-sky-400" />
+                <span>Healthcare Hub</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180 text-sky-400' : 'text-slate-400'}`} />
+              </button>
+
+              {/* Mega Dropdown Menu */}
+              {dropdownOpen && (
+                <div 
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[600px] sm:w-[680px] z-50 animate-in fade-in duration-100"
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  onMouseLeave={() => setDropdownOpen(false)}
+                >
+                  <div className="bg-slate-950/98 border border-slate-800 rounded-3xl p-5 shadow-2xl backdrop-blur-2xl grid grid-cols-3 gap-4">
+                  {/* Column 1: Patient & Doctors */}
+                  <div className="space-y-2.5">
+                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-sky-400 border-b border-slate-800 pb-1">
+                      Clinical Care
+                    </p>
+                    <Link
+                      href="/patient/dashboard"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 group-hover:scale-110 transition-transform">
+                        <User className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-sky-300">Patient Dashboard</h4>
+                        <p className="text-[10px] text-slate-400">Digital Health Card</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/doctors"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform">
+                        <UserCheck className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-cyan-300">Doctor Directory</h4>
+                        <p className="text-[10px] text-slate-400">Book Consultations</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/appointments"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 group-hover:scale-110 transition-transform">
+                        <Calendar className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-emerald-300">Appointments</h4>
+                        <p className="text-[10px] text-slate-400">Queue & Video Room</p>
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* Column 2: Digital Services */}
+                  <div className="space-y-2.5">
+                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-purple-400 border-b border-slate-800 pb-1">
+                      AI & Pharmacy
+                    </p>
+                    <Link
+                      href="/ai-assistant"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform">
+                        <Bot className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-purple-300">AI Triage Suite</h4>
+                        <p className="text-[10px] text-slate-400">Symptom Advice</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/pharmacy"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 group-hover:scale-110 transition-transform">
+                        <Pill className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-emerald-300">Online Pharmacy</h4>
+                        <p className="text-[10px] text-slate-400">2-Hour Delivery</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/labs"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 group-hover:scale-110 transition-transform">
+                        <TestTube className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-amber-300">Diagnostic Labs</h4>
+                        <p className="text-[10px] text-slate-400">Home Collection</p>
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* Column 3: Operations & Compare */}
+                  <div className="space-y-2.5">
+                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-400 border-b border-slate-800 pb-1">
+                      Enterprise Ops
+                    </p>
+                    <Link
+                      href="/compare"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 group-hover:scale-110 transition-transform">
+                        <GitCompare className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-blue-300">Compare Matrix</h4>
+                        <p className="text-[10px] text-slate-400">Side-by-Side Analytics</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/hospital/dashboard"
+                      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 transition-all"
+                    >
+                      <div className="p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 group-hover:scale-110 transition-transform">
+                        <Building2 className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white group-hover:text-sky-300">Hospital Hub</h4>
+                        <p className="text-[10px] text-slate-400">ICU & Blood Stock</p>
+                      </div>
+                    </Link>
+
+                    {(role === 'ADMIN' || role === 'SUPER_ADMIN') && (
+                      <Link
+                        href="/admin"
+                        className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-950/40 transition-all border border-emerald-500/30"
+                      >
+                        <div className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400">
+                          <ShieldCheck className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className="text-xs font-bold text-emerald-300">Admin Portal</h4>
+                          <p className="text-[10px] text-emerald-400/80">RBAC Controls</p>
+                        </div>
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </div>
             )}
+            </div>
           </nav>
 
-          {/* User & Role Controls */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
-            <div className="bg-slate-900/90 border border-slate-800 rounded-xl px-2 py-1 flex items-center gap-1.5 backdrop-blur-md whitespace-nowrap shrink-0">
-              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Role:</span>
+          {/* Right Action Items */}
+          <div className="hidden md:flex items-center gap-2.5 shrink-0">
+            {/* Emergency SOS High Priority Pill */}
+            <Link
+              href="/emergency"
+              className="px-3 py-1.5 rounded-xl bg-red-600/30 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/60 font-extrabold text-xs flex items-center gap-1.5 shadow-lg shadow-red-600/20 animate-pulse transition-all"
+            >
+              <Siren className="w-4 h-4 text-red-400 fill-red-400/30" />
+              <span>SOS Dispatch</span>
+            </Link>
+
+            {/* Quick Favorites & History */}
+            <div className="flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+              <Link
+                href="/favorites"
+                className={`p-1.5 rounded-lg transition-colors ${
+                  isActive('/favorites') ? 'bg-sky-600/20 text-red-400' : 'text-slate-400 hover:text-red-400'
+                }`}
+                title="Favorites"
+              >
+                <Heart className="w-4 h-4" />
+              </Link>
+
+              <Link
+                href="/history"
+                className={`p-1.5 rounded-lg transition-colors ${
+                  isActive('/history') ? 'bg-sky-600/20 text-sky-400' : 'text-slate-400 hover:text-sky-400'
+                }`}
+                title="History"
+              >
+                <History className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Role Switcher */}
+            <div className="bg-slate-900/90 border border-slate-800 rounded-xl px-2 py-1 flex items-center gap-1">
+              <span className="text-[10px] text-slate-400 font-bold uppercase">Role:</span>
               <select
                 value={role}
                 onChange={(e) => loginAs(e.target.value as UserRole)}
-                className="bg-slate-950 text-xs text-sky-300 font-extrabold py-0.5 px-2 rounded-lg border border-slate-700/80 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+                className="bg-slate-950 text-xs text-sky-300 font-extrabold py-0.5 px-1.5 rounded-lg border border-slate-700/80 focus:outline-none cursor-pointer"
                 suppressHydrationWarning
               >
                 <option value="GUEST">Guest</option>
@@ -140,27 +335,21 @@ export default function Navbar() {
             </div>
 
             {user ? (
-              <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-800 p-1 pl-3 rounded-xl backdrop-blur-md whitespace-nowrap shrink-0">
-                <div className="text-right leading-tight">
-                  <p className="text-xs font-bold text-slate-100">{user.displayName}</p>
-                  <p className="text-[10px] font-semibold text-sky-400">{user.role}</p>
-                </div>
-                <button
-                  onClick={logout}
-                  className="p-1.5 rounded-lg bg-slate-950 hover:bg-red-950/60 text-slate-400 hover:text-red-400 border border-slate-800 transition-colors"
-                  title="Logout"
-                  suppressHydrationWarning
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </div>
+              <button
+                onClick={logout}
+                className="p-1.5 rounded-xl bg-slate-900 hover:bg-red-950/60 text-slate-400 hover:text-red-400 border border-slate-800 transition-colors"
+                title="Logout"
+                suppressHydrationWarning
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             ) : (
               <button
                 onClick={() => loginAs('USER')}
-                className="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/20 transition-all flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                className="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/20 transition-all flex items-center gap-1"
                 suppressHydrationWarning
               >
-                <LogIn className="w-4 h-4 shrink-0" />
+                <LogIn className="w-4 h-4" />
                 <span>Sign In</span>
               </button>
             )}
@@ -168,9 +357,16 @@ export default function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center gap-2">
+            <Link
+              href="/emergency"
+              className="px-2.5 py-1.5 rounded-xl bg-red-600 text-white text-xs font-extrabold flex items-center gap-1"
+            >
+              <Siren className="w-4 h-4" />
+              <span>SOS</span>
+            </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800/80 transition-colors"
+              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800 transition-colors"
               suppressHydrationWarning
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -179,91 +375,89 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-2">
+        <div className="md:hidden bg-slate-950/98 backdrop-blur-2xl border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-2">
+          <Link
+            href="/emergency"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-extrabold bg-red-950/80 text-red-300 border border-red-800"
+          >
+            <Siren className="w-4 h-4 text-red-400" />
+            1-Tap Emergency SOS
+          </Link>
+
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-              isActive('/') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
-            }`}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
           >
-            <Building2 className="w-4 h-4 text-sky-400" />
-            Discover Hospitals
+            <Building2 className="w-4 h-4 text-sky-400" /> Discover Hospitals
           </Link>
-          <Link
-            href="/navigation"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-              isActive('/navigation') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <MapPin className="w-4 h-4 text-sky-400" />
-            Live Map & Routing
-          </Link>
-          <Link
-            href="/specialties"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-              isActive('/specialties') || pathname.startsWith('/specialties') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <Stethoscope className="w-4 h-4 text-emerald-400" />
-            Medical Specialties
-          </Link>
-          <Link
-            href="/favorites"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-              isActive('/favorites') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <Heart className="w-4 h-4 text-red-400" />
-            Favorites
-          </Link>
-          <Link
-            href="/history"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-              isActive('/history') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
-            }`}
-          >
-            <History className="w-4 h-4 text-sky-400" />
-            Navigation History
-          </Link>
-          {(role === 'ADMIN' || role === 'SUPER_ADMIN') && (
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                isActive('/admin') ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/30' : 'text-emerald-400 hover:bg-emerald-950/30'
-              }`}
-            >
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              Admin Dashboard
-            </Link>
-          )}
 
-          <div className="pt-4 border-t border-slate-800 space-y-2">
-            <p className="text-xs font-semibold text-slate-400">Switch Active Role:</p>
-            <div className="grid grid-cols-2 gap-2">
-              {(['GUEST', 'USER', 'ADMIN', 'SUPER_ADMIN'] as UserRole[]).map((r) => (
-                <button
-                  key={r}
-                  onClick={() => {
-                    loginAs(r);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`px-3 py-2 text-xs rounded-xl font-bold border transition-all ${
-                    role === r ? 'bg-sky-600 text-white border-sky-500 shadow-md shadow-sky-600/20' : 'bg-slate-900 text-slate-300 border-slate-800 hover:bg-slate-800'
-                  }`}
-                  suppressHydrationWarning
-                >
-                  {r === 'SUPER_ADMIN' ? 'Super Admin' : r}
-                </button>
-              ))}
-            </div>
-          </div>
+          <Link
+            href="/patient/dashboard"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
+          >
+            <User className="w-4 h-4 text-sky-400" /> Patient Dashboard & Health Card
+          </Link>
+
+          <Link
+            href="/doctors"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
+          >
+            <UserCheck className="w-4 h-4 text-cyan-400" /> Doctors & Consultations
+          </Link>
+
+          <Link
+            href="/appointments"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
+          >
+            <Calendar className="w-4 h-4 text-emerald-400" /> Appointments & Queue
+          </Link>
+
+          <Link
+            href="/ai-assistant"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-purple-300 hover:bg-slate-900"
+          >
+            <Bot className="w-4 h-4 text-purple-400" /> AI Symptom Triage
+          </Link>
+
+          <Link
+            href="/pharmacy"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
+          >
+            <Pill className="w-4 h-4 text-emerald-400" /> Online Pharmacy
+          </Link>
+
+          <Link
+            href="/labs"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
+          >
+            <TestTube className="w-4 h-4 text-amber-400" /> Diagnostic Labs
+          </Link>
+
+          <Link
+            href="/compare"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
+          >
+            <GitCompare className="w-4 h-4 text-blue-400" /> Hospital Comparison
+          </Link>
+
+          <Link
+            href="/hospital/dashboard"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-900"
+          >
+            <Building2 className="w-4 h-4 text-sky-400" /> Hospital Operations Hub
+          </Link>
         </div>
       )}
     </header>
