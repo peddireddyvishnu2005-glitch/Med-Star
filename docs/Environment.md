@@ -1,6 +1,7 @@
 # Environment Variables Configuration — MedStart
 
 ## 1. Web Frontend Environment Variables (`apps/web/.env.example`)
+
 ```env
 NEXT_PUBLIC_APP_NAME="MedStart"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
@@ -19,6 +20,7 @@ NEXT_PUBLIC_OPENROUTE_API_KEY="5b3ce3597851110001cf6248..."
 ```
 
 ## 2. Server API Environment Variables (`apps/server/.env.example`)
+
 ```env
 PORT=4000
 NODE_ENV=development

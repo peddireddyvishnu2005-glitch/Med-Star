@@ -1,21 +1,25 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { INITIAL_HOSPITALS, INITIAL_DOCTORS, INITIAL_REVIEWS } from '@/lib/mockData';
-import { useAuth } from '@/context/AuthContext';
-import { HospitalReview } from '@/types';
-import { 
-  MapPin, 
-  AlertCircle, 
-  Star, 
-  Heart, 
-  Navigation, 
+import React, { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import {
+  INITIAL_HOSPITALS,
+  INITIAL_DOCTORS,
+  INITIAL_REVIEWS,
+} from "@/lib/mockData";
+import { useAuth } from "@/context/AuthContext";
+import { HospitalReview } from "@/types";
+import {
+  MapPin,
+  AlertCircle,
+  Star,
+  Heart,
+  Navigation,
   Stethoscope,
   MessageSquarePlus,
-  ArrowLeft
-} from 'lucide-react';
+  ArrowLeft,
+} from "lucide-react";
 
 export default function HospitalDetailPage() {
   const params = useParams();
@@ -23,14 +27,19 @@ export default function HospitalDetailPage() {
   const { toggleFavorite, isFavorite, user } = useAuth();
 
   const hospitalId = params.id as string;
-  const hospital = INITIAL_HOSPITALS.find((h) => h.id === hospitalId) || INITIAL_HOSPITALS[0];
+  const hospital =
+    INITIAL_HOSPITALS.find((h) => h.id === hospitalId) || INITIAL_HOSPITALS[0];
   const doctors = INITIAL_DOCTORS.filter((d) => d.hospitalId === hospital.id);
 
-  const [reviews, setReviews] = useState<HospitalReview[]>(INITIAL_REVIEWS.filter(r => r.hospitalId === hospital.id));
-  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'DOCTORS' | 'REVIEWS'>('OVERVIEW');
+  const [reviews, setReviews] = useState<HospitalReview[]>(
+    INITIAL_REVIEWS.filter((r) => r.hospitalId === hospital.id),
+  );
+  const [activeTab, setActiveTab] = useState<
+    "OVERVIEW" | "DOCTORS" | "REVIEWS"
+  >("OVERVIEW");
 
   const [newReviewRating, setNewReviewRating] = useState<number>(5);
-  const [newReviewComment, setNewReviewComment] = useState<string>('');
+  const [newReviewComment, setNewReviewComment] = useState<string>("");
 
   const favorite = isFavorite(hospital.id);
 
@@ -41,20 +50,19 @@ export default function HospitalDetailPage() {
     const review: HospitalReview = {
       id: `rev-${Date.now()}`,
       hospitalId: hospital.id,
-      userId: user?.uid || 'usr-guest',
-      userName: user?.displayName || 'Anonymous Patient',
+      userId: user?.uid || "usr-guest",
+      userName: user?.displayName || "Anonymous Patient",
       rating: newReviewRating,
       comment: newReviewComment,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
 
     setReviews([review, ...reviews]);
-    setNewReviewComment('');
+    setNewReviewComment("");
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      
       <button
         onClick={() => router.back()}
         className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg"
@@ -66,7 +74,10 @@ export default function HospitalDetailPage() {
       <div className="relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl">
         <div className="relative h-72 sm:h-96 w-full">
           <Image
-            src={hospital.images[0] || 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=1200&q=80'}
+            src={
+              hospital.images[0] ||
+              "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=1200&q=80"
+            }
             alt={hospital.name}
             fill
             className="object-cover"
@@ -88,10 +99,15 @@ export default function HospitalDetailPage() {
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl font-extrabold text-white leading-tight">{hospital.name}</h1>
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+                {hospital.name}
+              </h1>
               <p className="text-xs sm:text-sm text-slate-300 flex items-center gap-1.5 mt-1">
                 <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                <span className="truncate">{hospital.address}, {hospital.city}, {hospital.state} {hospital.zip}</span>
+                <span className="truncate">
+                  {hospital.address}, {hospital.city}, {hospital.state}{" "}
+                  {hospital.zip}
+                </span>
               </p>
             </div>
 
@@ -100,15 +116,17 @@ export default function HospitalDetailPage() {
                 onClick={() => toggleFavorite(hospital.id)}
                 className={`p-2.5 sm:p-3 rounded-2xl border transition-all ${
                   favorite
-                    ? 'bg-red-500/20 border-red-500 text-red-400'
-                    : 'bg-slate-900/80 border-slate-700 text-slate-300 hover:text-white'
+                    ? "bg-red-500/20 border-red-500 text-red-400"
+                    : "bg-slate-900/80 border-slate-700 text-slate-300 hover:text-white"
                 }`}
               >
-                <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${favorite ? 'fill-current' : ''}`} />
+                <Heart
+                  className={`w-4 h-4 sm:w-5 sm:h-5 ${favorite ? "fill-current" : ""}`}
+                />
               </button>
 
               <button
-                onClick={() => router.push('/navigation')}
+                onClick={() => router.push("/navigation")}
                 className="flex-1 sm:flex-initial px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2"
               >
                 <Navigation className="w-4 h-4" />
@@ -121,46 +139,64 @@ export default function HospitalDetailPage() {
 
       <div className="flex border-b border-slate-800 gap-2 sm:gap-4 text-xs sm:text-sm font-bold overflow-x-auto pb-1">
         <button
-          onClick={() => setActiveTab('OVERVIEW')}
+          onClick={() => setActiveTab("OVERVIEW")}
           className={`pb-2.5 border-b-2 transition-colors whitespace-nowrap ${
-            activeTab === 'OVERVIEW' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400 hover:text-white'
+            activeTab === "OVERVIEW"
+              ? "border-sky-500 text-sky-400"
+              : "border-transparent text-slate-400 hover:text-white"
           }`}
         >
           Overview & Departments
         </button>
         <button
-          onClick={() => setActiveTab('DOCTORS')}
+          onClick={() => setActiveTab("DOCTORS")}
           className={`pb-2.5 border-b-2 transition-colors whitespace-nowrap ${
-            activeTab === 'DOCTORS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400 hover:text-white'
+            activeTab === "DOCTORS"
+              ? "border-sky-500 text-sky-400"
+              : "border-transparent text-slate-400 hover:text-white"
           }`}
         >
           Doctor Roster ({doctors.length})
         </button>
         <button
-          onClick={() => setActiveTab('REVIEWS')}
+          onClick={() => setActiveTab("REVIEWS")}
           className={`pb-2.5 border-b-2 transition-colors whitespace-nowrap ${
-            activeTab === 'REVIEWS' ? 'border-sky-500 text-sky-400' : 'border-transparent text-slate-400 hover:text-white'
+            activeTab === "REVIEWS"
+              ? "border-sky-500 text-sky-400"
+              : "border-transparent text-slate-400 hover:text-white"
           }`}
         >
           Patient Reviews ({reviews.length})
         </button>
       </div>
 
-      {activeTab === 'OVERVIEW' && (
+      {activeTab === "OVERVIEW" && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl space-y-4">
-              <h3 className="text-lg font-bold text-white">About the Medical Center</h3>
+              <h3 className="text-lg font-bold text-white">
+                About the Medical Center
+              </h3>
               <p className="text-sm text-slate-300 leading-relaxed">
-                {hospital.name} is a premier healthcare institution featuring state-of-the-art diagnostic imaging, round-the-clock emergency surgical care, intensive care units (ICU), and specialized outpatient clinics.
+                {hospital.name} is a premier healthcare institution featuring
+                state-of-the-art diagnostic imaging, round-the-clock emergency
+                surgical care, intensive care units (ICU), and specialized
+                outpatient clinics.
               </p>
 
-              <h4 className="text-sm font-bold text-white pt-2">Specialized Departments & Services</h4>
+              <h4 className="text-sm font-bold text-white pt-2">
+                Specialized Departments & Services
+              </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {hospital.departments.map((dept) => (
-                  <div key={dept} className="bg-slate-950 border border-slate-800 p-3 rounded-xl flex items-center gap-2.5">
+                  <div
+                    key={dept}
+                    className="bg-slate-950 border border-slate-800 p-3 rounded-xl flex items-center gap-2.5"
+                  >
                     <Stethoscope className="w-4 h-4 text-sky-400" />
-                    <span className="text-xs font-semibold text-slate-200">{dept}</span>
+                    <span className="text-xs font-semibold text-slate-200">
+                      {dept}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -169,12 +205,19 @@ export default function HospitalDetailPage() {
 
           <div className="space-y-4">
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
-              <h3 className="text-md font-bold text-white border-b border-slate-800 pb-2">Emergency & Contact Info</h3>
+              <h3 className="text-md font-bold text-white border-b border-slate-800 pb-2">
+                Emergency & Contact Info
+              </h3>
 
               {hospital.hasEmergency && (
                 <div className="bg-red-950/40 border border-red-800/40 p-3.5 rounded-xl space-y-1">
-                  <span className="text-[10px] font-bold text-red-400 uppercase">Live Emergency Hotline</span>
-                  <a href={`tel:${hospital.emergencyPhone}`} className="block text-lg font-extrabold text-white hover:underline">
+                  <span className="text-[10px] font-bold text-red-400 uppercase">
+                    Live Emergency Hotline
+                  </span>
+                  <a
+                    href={`tel:${hospital.emergencyPhone}`}
+                    className="block text-lg font-extrabold text-white hover:underline"
+                  >
                     {hospital.emergencyPhone}
                   </a>
                 </div>
@@ -183,16 +226,25 @@ export default function HospitalDetailPage() {
               <div className="space-y-2 text-xs text-slate-300">
                 <div className="flex items-center justify-between py-1 border-b border-slate-800">
                   <span className="text-slate-400">General Contact:</span>
-                  <span className="font-semibold text-slate-100">{hospital.phone}</span>
+                  <span className="font-semibold text-slate-100">
+                    {hospital.phone}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between py-1 border-b border-slate-800">
                   <span className="text-slate-400">Operating Hours:</span>
-                  <span className="font-semibold text-emerald-400">{hospital.operatingHours}</span>
+                  <span className="font-semibold text-emerald-400">
+                    {hospital.operatingHours}
+                  </span>
                 </div>
                 {hospital.hasEmergency && (
                   <div className="flex items-center justify-between py-1">
-                    <span className="text-slate-400">ICU Bed Availability:</span>
-                    <span className="font-bold text-emerald-400">{hospital.availableEmergencyBeds} / {hospital.totalEmergencyBeds}</span>
+                    <span className="text-slate-400">
+                      ICU Bed Availability:
+                    </span>
+                    <span className="font-bold text-emerald-400">
+                      {hospital.availableEmergencyBeds} /{" "}
+                      {hospital.totalEmergencyBeds}
+                    </span>
                   </div>
                 )}
               </div>
@@ -201,24 +253,42 @@ export default function HospitalDetailPage() {
         </div>
       )}
 
-      {activeTab === 'DOCTORS' && (
+      {activeTab === "DOCTORS" && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {doctors.map((doc) => (
-            <div key={doc.id} className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-3 flex flex-col justify-between">
+            <div
+              key={doc.id}
+              className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-3 flex flex-col justify-between"
+            >
               <div className="flex items-center gap-3">
                 <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-sky-500/40 shrink-0">
-                  <Image src={doc.avatarUrl} alt={doc.name} fill className="object-cover" />
+                  <Image
+                    src={doc.avatarUrl}
+                    alt={doc.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div>
                   <h4 className="font-bold text-white text-base">{doc.name}</h4>
-                  <p className="text-xs text-sky-400 font-semibold">{doc.specialty}</p>
-                  <p className="text-[11px] text-slate-400">{doc.experienceYears} Years Exp.</p>
+                  <p className="text-xs text-sky-400 font-semibold">
+                    {doc.specialty}
+                  </p>
+                  <p className="text-[11px] text-slate-400">
+                    {doc.experienceYears} Years Exp.
+                  </p>
                 </div>
               </div>
 
               <div className="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-1">
-                <p><strong className="text-slate-200">Department:</strong> {doc.department}</p>
-                <p><strong className="text-slate-200">Available:</strong> {doc.availableDays.join(', ')}</p>
+                <p>
+                  <strong className="text-slate-200">Department:</strong>{" "}
+                  {doc.department}
+                </p>
+                <p>
+                  <strong className="text-slate-200">Available:</strong>{" "}
+                  {doc.availableDays.join(", ")}
+                </p>
               </div>
 
               <a
@@ -232,9 +302,12 @@ export default function HospitalDetailPage() {
         </div>
       )}
 
-      {activeTab === 'REVIEWS' && (
+      {activeTab === "REVIEWS" && (
         <div className="space-y-6">
-          <form onSubmit={handleAddReview} className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-3 max-w-2xl">
+          <form
+            onSubmit={handleAddReview}
+            className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-3 max-w-2xl"
+          >
             <h4 className="text-sm font-bold text-white flex items-center gap-2">
               <MessageSquarePlus className="w-4 h-4 text-sky-400" />
               Write a Patient Review
@@ -246,7 +319,7 @@ export default function HospitalDetailPage() {
                   type="button"
                   key={star}
                   onClick={() => setNewReviewRating(star)}
-                  className={`text-lg transition-transform ${star <= newReviewRating ? 'text-amber-400 scale-110' : 'text-slate-600'}`}
+                  className={`text-lg transition-transform ${star <= newReviewRating ? "text-amber-400 scale-110" : "text-slate-600"}`}
                 >
                   ★
                 </button>
@@ -269,19 +342,27 @@ export default function HospitalDetailPage() {
 
           <div className="space-y-4 max-w-3xl">
             {reviews.map((rev) => (
-              <div key={rev.id} className="bg-slate-900/60 border border-slate-800 p-4 rounded-2xl space-y-2">
+              <div
+                key={rev.id}
+                className="bg-slate-900/60 border border-slate-800 p-4 rounded-2xl space-y-2"
+              >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-white text-sm">{rev.userName}</span>
-                  <span className="text-amber-400 text-xs font-bold">{'★'.repeat(rev.rating)}</span>
+                  <span className="font-bold text-white text-sm">
+                    {rev.userName}
+                  </span>
+                  <span className="text-amber-400 text-xs font-bold">
+                    {"★".repeat(rev.rating)}
+                  </span>
                 </div>
                 <p className="text-xs text-slate-300">{rev.comment}</p>
-                <span className="text-[10px] text-slate-500 block">{new Date(rev.createdAt).toLocaleDateString()}</span>
+                <span className="text-[10px] text-slate-500 block">
+                  {new Date(rev.createdAt).toLocaleDateString()}
+                </span>
               </div>
             ))}
           </div>
         </div>
       )}
-
     </div>
   );
 }

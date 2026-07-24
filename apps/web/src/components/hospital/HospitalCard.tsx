@@ -1,39 +1,47 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Hospital } from '@/types';
-import { useAuth } from '@/context/AuthContext';
-import { 
-  MapPin, 
-  Heart, 
-  Navigation, 
-  Star, 
-  AlertCircle, 
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Hospital } from "@/types";
+import { useAuth } from "@/context/AuthContext";
+import {
+  MapPin,
+  Heart,
+  Navigation,
+  Star,
+  AlertCircle,
   Bed,
-  PhoneCall 
-} from 'lucide-react';
+  PhoneCall,
+} from "lucide-react";
 
 interface HospitalCardProps {
   hospital: Hospital;
   onNavigate: (hosp: Hospital) => void;
 }
 
-export default function HospitalCard({ hospital, onNavigate }: HospitalCardProps) {
+export default function HospitalCard({
+  hospital,
+  onNavigate,
+}: HospitalCardProps) {
   const { toggleFavorite, isFavorite } = useAuth();
   const favorite = isFavorite(hospital.id);
 
-  const bedPercentage = hospital.totalEmergencyBeds > 0
-    ? Math.round((hospital.availableEmergencyBeds / hospital.totalEmergencyBeds) * 100)
-    : 0;
+  const bedPercentage =
+    hospital.totalEmergencyBeds > 0
+      ? Math.round(
+          (hospital.availableEmergencyBeds / hospital.totalEmergencyBeds) * 100,
+        )
+      : 0;
 
   return (
     <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl overflow-hidden hover:border-sky-500/50 hover:-translate-y-1.5 transition-all duration-300 hover:shadow-2xl hover:shadow-sky-500/10 group flex flex-col">
-
       <div className="relative h-48 w-full overflow-hidden bg-slate-950">
         <Image
-          src={hospital.images[0] || 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=80'}
+          src={
+            hospital.images[0] ||
+            "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=80"
+          }
           alt={hospital.name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -47,12 +55,12 @@ export default function HospitalCard({ hospital, onNavigate }: HospitalCardProps
           }}
           className={`absolute top-3 right-3 p-2.5 rounded-full backdrop-blur-md transition-all ${
             favorite
-              ? 'bg-red-500/30 text-red-400 border border-red-500/50 shadow-lg glow-red'
-              : 'bg-slate-950/70 text-slate-300 hover:text-white border border-white/10 hover:bg-slate-900'
+              ? "bg-red-500/30 text-red-400 border border-red-500/50 shadow-lg glow-red"
+              : "bg-slate-950/70 text-slate-300 hover:text-white border border-white/10 hover:bg-slate-900"
           }`}
-          title={favorite ? 'Remove from favorites' : 'Save to favorites'}
+          title={favorite ? "Remove from favorites" : "Save to favorites"}
         >
-          <Heart className={`w-4 h-4 ${favorite ? 'fill-current' : ''}`} />
+          <Heart className={`w-4 h-4 ${favorite ? "fill-current" : ""}`} />
         </button>
 
         {hospital.hasEmergency ? (
@@ -88,7 +96,9 @@ export default function HospitalCard({ hospital, onNavigate }: HospitalCardProps
 
           <p className="text-xs text-slate-400 flex items-center gap-1 mb-3">
             <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-            <span className="truncate">{hospital.address}, {hospital.city}</span>
+            <span className="truncate">
+              {hospital.address}, {hospital.city}
+            </span>
           </p>
 
           {hospital.hasEmergency && (
@@ -99,15 +109,22 @@ export default function HospitalCard({ hospital, onNavigate }: HospitalCardProps
                   <span>Available ICU Beds:</span>
                 </div>
                 <span className="font-extrabold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/50">
-                  {hospital.availableEmergencyBeds} / {hospital.totalEmergencyBeds}
+                  {hospital.availableEmergencyBeds} /{" "}
+                  {hospital.totalEmergencyBeds}
                 </span>
               </div>
               <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                <div 
+                <div
                   className={`h-full rounded-full transition-all ${
-                    bedPercentage > 50 ? 'bg-emerald-500' : bedPercentage > 20 ? 'bg-amber-500' : 'bg-red-500'
+                    bedPercentage > 50
+                      ? "bg-emerald-500"
+                      : bedPercentage > 20
+                        ? "bg-amber-500"
+                        : "bg-red-500"
                   }`}
-                  style={{ width: `${Math.min(100, Math.max(10, bedPercentage))}%` }}
+                  style={{
+                    width: `${Math.min(100, Math.max(10, bedPercentage))}%`,
+                  }}
                 />
               </div>
             </div>
@@ -165,7 +182,6 @@ export default function HospitalCard({ hospital, onNavigate }: HospitalCardProps
           </button>
         </div>
       </div>
-
     </div>
   );
 }

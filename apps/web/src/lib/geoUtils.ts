@@ -1,10 +1,10 @@
-import { NavigationStep, RouteInfo } from '@/types';
+import { NavigationStep, RouteInfo } from "@/types";
 
 export function calculateHaversineDistance(
   lat1: number,
   lon1: number,
   lat2: number,
-  lon2: number
+  lon2: number,
 ): number {
   const R = 6371;
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -24,9 +24,14 @@ export function generateRouteGeometry(
   startLat: number,
   startLng: number,
   destLat: number,
-  destLng: number
+  destLng: number,
 ): RouteInfo {
-  const distance = calculateHaversineDistance(startLat, startLng, destLat, destLng);
+  const distance = calculateHaversineDistance(
+    startLat,
+    startLng,
+    destLat,
+    destLng,
+  );
   const durationMins = Math.max(3, Math.round((distance / 35) * 60));
 
   const stepsCount = 6;
@@ -34,9 +39,9 @@ export function generateRouteGeometry(
 
   for (let i = 0; i <= stepsCount; i++) {
     const ratio = i / stepsCount;
-    const jitterLat = i > 0 && i < stepsCount ? (Math.sin(i) * 0.003) : 0;
-    const jitterLng = i > 0 && i < stepsCount ? (Math.cos(i) * 0.003) : 0;
-    
+    const jitterLat = i > 0 && i < stepsCount ? Math.sin(i) * 0.003 : 0;
+    const jitterLng = i > 0 && i < stepsCount ? Math.cos(i) * 0.003 : 0;
+
     const waypointLat = startLat + (destLat - startLat) * ratio + jitterLat;
     const waypointLng = startLng + (destLng - startLng) * ratio + jitterLng;
     geometry.push([waypointLat, waypointLng]);
@@ -44,35 +49,35 @@ export function generateRouteGeometry(
 
   const steps: NavigationStep[] = [
     {
-      instruction: 'Head North towards the main boulevard',
+      instruction: "Head North towards the main boulevard",
       distance: `${Math.round(distance * 0.15 * 1000)} m`,
-      duration: '2 mins',
-      icon: 'straight'
+      duration: "2 mins",
+      icon: "straight",
     },
     {
-      instruction: 'Turn right onto Healthcare Avenue',
+      instruction: "Turn right onto Healthcare Avenue",
       distance: `${Math.round(distance * 0.35 * 1000)} m`,
-      duration: '4 mins',
-      icon: 'turn-right'
+      duration: "4 mins",
+      icon: "turn-right",
     },
     {
-      instruction: 'Merge left at the central medical interchange',
+      instruction: "Merge left at the central medical interchange",
       distance: `${Math.round(distance * 0.3 * 1000)} m`,
-      duration: '3 mins',
-      icon: 'turn-left'
+      duration: "3 mins",
+      icon: "turn-left",
     },
     {
-      instruction: 'Arrive at Emergency Bay Entrance on your left',
+      instruction: "Arrive at Emergency Bay Entrance on your left",
       distance: `${Math.round(distance * 0.2 * 1000)} m`,
-      duration: '2 mins',
-      icon: 'destination'
-    }
+      duration: "2 mins",
+      icon: "destination",
+    },
   ];
 
   return {
     distanceKm: distance,
     durationMins,
     geometry,
-    steps
+    steps,
   };
 }

@@ -1,6 +1,7 @@
 # User Journey Document — MedStart
 
 ## 1. User Journey 1: Emergency Patient seeking immediate care
+
 1. **Trigger**: User experiences a medical emergency at home.
 2. **Step 1**: Opens MedStart web app. The platform immediately prompts for location access.
 3. **Step 2**: The hero section highlights an "Emergency 24/7 Nearby" quick button. User taps it.
@@ -10,6 +11,7 @@
 7. **Step 6**: User reaches hospital safely.
 
 ## 2. User Journey 2: Outpatient discovering a Cardiology Specialist
+
 1. **Trigger**: Patient needs a consultation with a senior cardiologist.
 2. **Step 1**: User navigates to MedStart Search. Selects "Cardiology" department filter.
 3. **Step 2**: Browses hospital cards sorted by rating.

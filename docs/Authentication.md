@@ -1,7 +1,9 @@
 # Authentication & Role-Based Access Control (RBAC) — MedStart
 
 ## 1. Authentication Engine
+
 MedStart uses Firebase Authentication supporting:
+
 - Email / Password Login
 - Google OAuth Single Sign-On (SSO)
 - Phone SMS Verification
@@ -9,14 +11,15 @@ MedStart uses Firebase Authentication supporting:
 
 ## 2. Role-Based Access Control (RBAC) Matrix
 
-| User Role | Discover & Search | View Details & Route | Save Favorites | Write Reviews | Admin Dashboard | CRUD Hospitals / Doctors | Manage Users |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Guest** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **User** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
-| **Admin** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| **Super Admin** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| User Role       | Discover & Search | View Details & Route | Save Favorites | Write Reviews | Admin Dashboard | CRUD Hospitals / Doctors | Manage Users |
+| :-------------- | :---------------- | :------------------- | :------------- | :------------ | :-------------- | :----------------------- | :----------- |
+| **Guest**       | ✅                | ✅                   | ❌             | ❌            | ❌              | ❌                       | ❌           |
+| **User**        | ✅                | ✅                   | ✅             | ✅            | ❌              | ❌                       | ❌           |
+| **Admin**       | ✅                | ✅                   | ✅             | ✅            | ✅              | ✅                       | ❌           |
+| **Super Admin** | ✅                | ✅                   | ✅             | ✅            | ✅              | ✅                       | ✅           |
 
 ## 3. NestJS Authorization Execution
+
 ```typescript
 @UseGuards(FirebaseAuthGuard, RolesGuard)
 @Roles(UserRole.ADMIN, UserRole.SUPER_ADMIN)

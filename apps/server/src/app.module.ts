@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { HospitalsController } from './modules/hospitals/hospitals.controller';
-import { HospitalsService } from './modules/hospitals/hospitals.service';
+import { Module } from "@nestjs/common";
+import { HospitalsController } from "./modules/hospitals/hospitals.controller";
+import { HospitalsService } from "./modules/hospitals/hospitals.service";
 
 @Module({
   imports: [],

@@ -117,6 +117,7 @@ export default function Navbar() {
                 value={role}
                 onChange={(e) => loginAs(e.target.value as UserRole)}
                 className="bg-slate-950 text-xs text-sky-300 font-extrabold py-0.5 px-2 rounded-lg border border-slate-700/80 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+                suppressHydrationWarning
               >
                 <option value="GUEST">Guest</option>
                 <option value="USER">Patient</option>

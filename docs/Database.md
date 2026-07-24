@@ -1,11 +1,13 @@
 # Database Specification & Firestore Data Model — MedStart
 
 ## 1. Overview
+
 Cloud Firestore is utilized as the primary enterprise document database.
 
 ## 2. Collections & Document Schemas
 
 ### 2.1 `hospitals` Collection
+
 ```json
 {
   "id": "hosp_101",
@@ -21,7 +23,7 @@ Cloud Firestore is utilized as the primary enterprise document database.
   "availableEmergencyBeds": 14,
   "totalEmergencyBeds": 20,
   "lat": 40.7128,
-  "lng": -74.0060,
+  "lng": -74.006,
   "rating": 4.8,
   "reviewCount": 124,
   "images": ["https://storage.googleapis.com/medstart/hosp1.jpg"],
@@ -34,6 +36,7 @@ Cloud Firestore is utilized as the primary enterprise document database.
 ```
 
 ### 2.2 `doctors` Collection
+
 ```json
 {
   "id": "doc_201",
@@ -51,6 +54,7 @@ Cloud Firestore is utilized as the primary enterprise document database.
 ```
 
 ### 2.3 `users` Collection
+
 ```json
 {
   "uid": "user_abc123",
@@ -64,6 +68,7 @@ Cloud Firestore is utilized as the primary enterprise document database.
 ```
 
 ### 2.4 `routeHistory` Subcollection (`users/{uid}/routeHistory`)
+
 ```json
 {
   "id": "route_991",
@@ -72,7 +77,7 @@ Cloud Firestore is utilized as the primary enterprise document database.
   "startLat": 40.7306,
   "startLng": -73.9352,
   "destLat": 40.7128,
-  "destLng": -74.0060,
+  "destLng": -74.006,
   "distanceKm": 4.2,
   "durationMins": 12,
   "timestamp": "2026-07-23T14:30:00Z"

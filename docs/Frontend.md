@@ -1,9 +1,11 @@
 # Frontend Architecture — MedStart
 
 ## 1. Overview & Framework Setup
+
 The frontend (`apps/web`) is built with Next.js 15 App Router using React 19, TypeScript, Tailwind CSS, Lucide icons, and Leaflet mapping libraries.
 
 ## 2. Directory Architecture
+
 ```
 apps/web/src/
 ├── app/                  # Next.js 15 App Router pages & layouts

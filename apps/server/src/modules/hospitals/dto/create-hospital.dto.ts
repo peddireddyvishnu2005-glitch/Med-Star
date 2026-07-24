@@ -1,32 +1,32 @@
-import { IsString, IsBoolean, IsNumber, IsArray } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsBoolean, IsNumber, IsArray } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateHospitalDto {
-  @ApiProperty({ example: 'Metropolis General Hospital' })
+  @ApiProperty({ example: "Metropolis General Hospital" })
   @IsString()
   name: string;
 
-  @ApiProperty({ example: '500 Health Sciences Plaza' })
+  @ApiProperty({ example: "500 Health Sciences Plaza" })
   @IsString()
   address: string;
 
-  @ApiProperty({ example: 'Metropolis' })
+  @ApiProperty({ example: "Metropolis" })
   @IsString()
   city: string;
 
-  @ApiProperty({ example: 'NY' })
+  @ApiProperty({ example: "NY" })
   @IsString()
   state: string;
 
-  @ApiProperty({ example: '10001' })
+  @ApiProperty({ example: "10001" })
   @IsString()
   zip: string;
 
-  @ApiProperty({ example: '+1 (555) 234-5678' })
+  @ApiProperty({ example: "+1 (555) 234-5678" })
   @IsString()
   phone: string;
 
-  @ApiProperty({ example: '+1 (555) 911-0001' })
+  @ApiProperty({ example: "+1 (555) 911-0001" })
   @IsString()
   emergencyPhone: string;
 
@@ -46,15 +46,15 @@ export class CreateHospitalDto {
   @IsNumber()
   lat: number;
 
-  @ApiProperty({ example: -74.0060 })
+  @ApiProperty({ example: -74.006 })
   @IsNumber()
   lng: number;
 
-  @ApiProperty({ example: ['Emergency & Trauma', 'Cardiology'] })
+  @ApiProperty({ example: ["Emergency & Trauma", "Cardiology"] })
   @IsArray()
   departments: string[];
 
-  @ApiProperty({ example: '24/7 Open' })
+  @ApiProperty({ example: "24/7 Open" })
   @IsString()
   operatingHours: string;
 }

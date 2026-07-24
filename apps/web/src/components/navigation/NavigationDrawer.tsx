@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Hospital, RouteInfo } from '@/types';
-import { 
-  Clock, 
-  MapPin, 
-  ArrowUpRight, 
-  CornerUpRight, 
-  CornerUpLeft, 
-  CheckCircle2, 
-  PhoneCall, 
+import React, { useState } from "react";
+import { Hospital, RouteInfo } from "@/types";
+import {
+  Clock,
+  MapPin,
+  ArrowUpRight,
+  CornerUpRight,
+  CornerUpLeft,
+  CheckCircle2,
+  PhoneCall,
   X,
   Volume2,
-  AlertTriangle
-} from 'lucide-react';
+  AlertTriangle,
+} from "lucide-react";
 
 interface NavigationDrawerProps {
   hospital: Hospital;
@@ -24,32 +24,34 @@ export default function NavigationDrawer({
   hospital,
   routeInfo,
   onClose,
-  onCompleteNavigation
+  onCompleteNavigation,
 }: NavigationDrawerProps) {
-  const [routeMode, setRouteMode] = useState<'FASTEST' | 'SHORTEST' | 'EMERGENCY'>('FASTEST');
+  const [routeMode, setRouteMode] = useState<
+    "FASTEST" | "SHORTEST" | "EMERGENCY"
+  >("FASTEST");
 
   const renderStepIcon = (iconType: string) => {
     switch (iconType) {
-      case 'turn-right':
+      case "turn-right":
         return <CornerUpRight className="w-5 h-5 text-sky-400 shrink-0" />;
-      case 'turn-left':
+      case "turn-left":
         return <CornerUpLeft className="w-5 h-5 text-sky-400 shrink-0" />;
-      case 'destination':
+      case "destination":
         return <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />;
       default:
         return <ArrowUpRight className="w-5 h-5 text-sky-400 shrink-0" />;
     }
   };
 
-  const currentDuration = routeMode === 'EMERGENCY'
-    ? Math.max(1, routeInfo.durationMins - 1)
-    : routeMode === 'FASTEST'
-    ? routeInfo.durationMins
-    : routeInfo.durationMins + 2;
+  const currentDuration =
+    routeMode === "EMERGENCY"
+      ? Math.max(1, routeInfo.durationMins - 1)
+      : routeMode === "FASTEST"
+        ? routeInfo.durationMins
+        : routeInfo.durationMins + 2;
 
   return (
     <div className="bg-slate-900/95 backdrop-blur-xl border border-slate-800 rounded-3xl p-5 shadow-2xl space-y-4 max-w-md w-full glow-sky">
-
       <div className="flex items-start justify-between border-b border-slate-800 pb-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
@@ -62,10 +64,14 @@ export default function NavigationDrawer({
             </span>
           </div>
 
-          <h3 className="text-lg font-extrabold text-white leading-tight">{hospital.name}</h3>
+          <h3 className="text-lg font-extrabold text-white leading-tight">
+            {hospital.name}
+          </h3>
           <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
             <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-            <span className="truncate">{hospital.address}, {hospital.city}</span>
+            <span className="truncate">
+              {hospital.address}, {hospital.city}
+            </span>
           </p>
         </div>
 
@@ -80,10 +86,14 @@ export default function NavigationDrawer({
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-slate-950/80 p-3 rounded-2xl border border-slate-800/80">
           <p className="text-[11px] text-slate-400 font-medium">Distance</p>
-          <p className="text-xl font-extrabold text-sky-400">{routeInfo.distanceKm} km</p>
+          <p className="text-xl font-extrabold text-sky-400">
+            {routeInfo.distanceKm} km
+          </p>
         </div>
         <div className="bg-slate-950/80 p-3 rounded-2xl border border-slate-800/80">
-          <p className="text-[11px] text-slate-400 font-medium">Est. Drive Time</p>
+          <p className="text-[11px] text-slate-400 font-medium">
+            Est. Drive Time
+          </p>
           <p className="text-xl font-extrabold text-emerald-400 flex items-center gap-1">
             <Clock className="w-4 h-4" />
             {currentDuration} mins
@@ -93,31 +103,31 @@ export default function NavigationDrawer({
 
       <div className="flex bg-slate-950 p-1 rounded-2xl border border-slate-800 gap-1 text-xs font-bold">
         <button
-          onClick={() => setRouteMode('FASTEST')}
+          onClick={() => setRouteMode("FASTEST")}
           className={`flex-1 py-1.5 rounded-xl transition-all ${
-            routeMode === 'FASTEST'
-              ? 'bg-sky-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white'
+            routeMode === "FASTEST"
+              ? "bg-sky-600 text-white shadow-md"
+              : "text-slate-400 hover:text-white"
           }`}
         >
           ⚡ Fastest
         </button>
         <button
-          onClick={() => setRouteMode('SHORTEST')}
+          onClick={() => setRouteMode("SHORTEST")}
           className={`flex-1 py-1.5 rounded-xl transition-all ${
-            routeMode === 'SHORTEST'
-              ? 'bg-sky-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-white'
+            routeMode === "SHORTEST"
+              ? "bg-sky-600 text-white shadow-md"
+              : "text-slate-400 hover:text-white"
           }`}
         >
           📏 Shortest
         </button>
         <button
-          onClick={() => setRouteMode('EMERGENCY')}
+          onClick={() => setRouteMode("EMERGENCY")}
           className={`flex-1 py-1.5 rounded-xl transition-all flex items-center justify-center gap-1 ${
-            routeMode === 'EMERGENCY'
-              ? 'bg-red-600 text-white shadow-md glow-red'
-              : 'text-red-400 hover:text-white'
+            routeMode === "EMERGENCY"
+              ? "bg-red-600 text-white shadow-md glow-red"
+              : "text-red-400 hover:text-white"
           }`}
         >
           <AlertTriangle className="w-3 h-3" />
@@ -128,7 +138,9 @@ export default function NavigationDrawer({
       <div>
         <h4 className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
           <span>Turn-by-Turn GPS Guidance</span>
-          <span className="text-sky-400 lowercase">{routeInfo.steps.length} steps</span>
+          <span className="text-sky-400 lowercase">
+            {routeInfo.steps.length} steps
+          </span>
         </h4>
 
         <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
@@ -137,14 +149,16 @@ export default function NavigationDrawer({
               key={idx}
               className={`p-3 rounded-2xl border flex items-start gap-3 transition-all ${
                 idx === 0
-                  ? 'bg-sky-950/60 border-sky-500/50 text-white shadow-md'
-                  : 'bg-slate-950/60 border-slate-800/80 text-slate-300'
+                  ? "bg-sky-950/60 border-sky-500/50 text-white shadow-md"
+                  : "bg-slate-950/60 border-slate-800/80 text-slate-300"
               }`}
             >
               {renderStepIcon(step.icon)}
               <div className="flex-1 text-xs">
                 <p className="font-bold text-slate-100">{step.instruction}</p>
-                <span className="text-[11px] text-slate-400 font-medium">{step.distance} • {step.duration}</span>
+                <span className="text-[11px] text-slate-400 font-medium">
+                  {step.distance} • {step.duration}
+                </span>
               </div>
               {idx === 0 && (
                 <span className="text-[9px] font-extrabold bg-sky-500 text-slate-950 px-1.5 py-0.5 rounded">
@@ -172,7 +186,6 @@ export default function NavigationDrawer({
           Arrived & Log Session
         </button>
       </div>
-
     </div>
   );
 }

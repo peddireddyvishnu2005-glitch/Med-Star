@@ -1,6 +1,7 @@
 # Application Flow Document — MedStart
 
 ## 1. Flow Overview
+
 MedStart supports three primary user navigation flows: Guest Flow, Registered User Flow, and Admin Flow.
 
 ## 2. Guest User Flow Diagram

@@ -1,6 +1,7 @@
 # UI/UX Design System Specification — MedStart
 
 ## 1. Design Philosophy
+
 MedStart applies a modern glassmorphic aesthetic tailored for clinical clarity, high contrast accessibility, dynamic responsiveness, and premium user experience.
 
 ## 2. Color Palette (Tailwind Tokens & CSS Variables)
@@ -8,16 +9,16 @@ MedStart applies a modern glassmorphic aesthetic tailored for clinical clarity, 
 ```css
 :root {
   /* Brand Palette */
-  --primary: #0284c7;         /* Ocean Blue */
+  --primary: #0284c7; /* Ocean Blue */
   --primary-foreground: #ffffff;
-  --secondary: #0f172a;       /* Deep Slate */
-  --accent: #06b6d4;          /* Cyan Accent */
-  
+  --secondary: #0f172a; /* Deep Slate */
+  --accent: #06b6d4; /* Cyan Accent */
+
   /* Status Colors */
-  --emergency: #ef4444;       /* Vivid Crimson */
-  --success: #10b981;         /* Emerald Green */
-  --warning: #f59e0b;         /* Amber Yellow */
-  
+  --emergency: #ef4444; /* Vivid Crimson */
+  --success: #10b981; /* Emerald Green */
+  --warning: #f59e0b; /* Amber Yellow */
+
   /* Theme Surfaces (Light Mode) */
   --background: #f8fafc;
   --surface: #ffffff;
@@ -37,6 +38,7 @@ MedStart applies a modern glassmorphic aesthetic tailored for clinical clarity, 
 ```
 
 ## 3. Typography Hierarchy
+
 - **Primary Font**: `Inter`, system-ui, sans-serif
 - **Heading 1**: 2.5rem (40px) / Bold / Tracking tight
 - **Heading 2**: 1.875rem (30px) / SemiBold
@@ -45,6 +47,7 @@ MedStart applies a modern glassmorphic aesthetic tailored for clinical clarity, 
 - **Caption / Meta**: 0.875rem (14px) / Regular
 
 ## 4. Responsive Breakpoints
+
 - **Mobile S**: 320px
 - **Mobile M**: 375px
 - **Mobile L**: 480px

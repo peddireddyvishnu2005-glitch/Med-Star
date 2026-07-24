@@ -1,4 +1,4 @@
-export type UserRole = 'GUEST' | 'USER' | 'ADMIN' | 'SUPER_ADMIN';
+export type UserRole = "GUEST" | "USER" | "ADMIN" | "SUPER_ADMIN";
 
 export interface UserProfile {
   uid: string;
@@ -30,7 +30,7 @@ export interface Doctor {
   email: string;
   availableDays: string[];
   avatarUrl: string;
-  status: 'ACTIVE' | 'INACTIVE';
+  status: "ACTIVE" | "INACTIVE";
 }
 
 export interface HospitalReview {
@@ -63,7 +63,7 @@ export interface Hospital {
   images: string[];
   departments: string[];
   operatingHours: string;
-  status: 'ACTIVE' | 'INACTIVE';
+  status: "ACTIVE" | "INACTIVE";
   createdAt: string;
   updatedAt: string;
   distanceKm?: number;
@@ -73,7 +73,7 @@ export interface NavigationStep {
   instruction: string;
   distance: string;
   duration: string;
-  icon: 'straight' | 'turn-left' | 'turn-right' | 'destination' | 'uturn';
+  icon: "straight" | "turn-left" | "turn-right" | "destination" | "uturn";
 }
 
 export interface RouteInfo {

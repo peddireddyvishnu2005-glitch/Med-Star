@@ -1,6 +1,7 @@
 # Architecture Specification — MedStart
 
 ## 1. Monorepo Architectural Pattern
+
 MedStart leverages a clean monorepo architecture separating client applications, server endpoints, and shared configuration.
 
 ```
@@ -15,6 +16,7 @@ medstart-monorepo/
 ```
 
 ## 2. Layer Separation & Clean Architecture
+
 Following Clean Architecture principles, both the Frontend and Backend enforce strict boundaries:
 
 1. **Presentation Layer**: React Components, Page Routes, UI Design Tokens.
@@ -23,6 +25,7 @@ Following Clean Architecture principles, both the Frontend and Backend enforce s
 4. **Infrastructure Layer**: Firebase SDK integrations, Leaflet API adapters, HTTP Clients.
 
 ## 3. Data Flow Architecture
+
 ```
 [User Browser / Device]
        │ (1) Action / Input
