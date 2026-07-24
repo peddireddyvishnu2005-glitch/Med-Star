@@ -132,7 +132,7 @@ export default function SpecialtyDetailPage() {
               suppressHydrationWarning
             >
               <PhoneCall className="w-4 h-4 animate-bounce" />
-              Emergency SOS (911)
+              24/7 Emergency SOS (911 / 112)
             </a>
           </div>
 
