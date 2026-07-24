@@ -10,42 +10,138 @@ export const INITIAL_DEPARTMENTS: Department[] = [
   {
     id: "dept-1",
     name: "Emergency & Trauma",
+    slug: "emergency-trauma",
     description: "24/7 critical care, resuscitation, and urgent trauma surgery",
+    longDescription:
+      "Level 1 and Level 2 Emergency Trauma Centers providing immediate 24/7 resuscitation, critical triage, cardiac care, and acute surgical intervention backed by dedicated ICU beds and round-the-clock specialists.",
     icon: "AlertTriangle",
+    headDoctor: "Dr. Marcus Vance (Chief of Trauma Surgery)",
+    procedures: [
+      "Rapid Resuscitation & Triage",
+      "Acute Cardiac & Stroke Thrombolysis",
+      "Polytrauma Emergency Laparotomy",
+      "Airway Management & Mechanical Ventilation",
+    ],
+    commonConditions: [
+      "Severe Physical Trauma",
+      "Acute Myocardial Infarction",
+      "Ischemic & Hemorrhagic Stroke",
+      "Severe Respiratory Distress",
+    ],
   },
   {
     id: "dept-2",
-    name: "Cardiology",
+    name: "Cardiology & Vascular",
+    slug: "cardiology",
     description:
       "Advanced cardiovascular diagnosis, catheterization, and open-heart surgery",
+    longDescription:
+      "Comprehensive cardiovascular institute equipped with state-of-the-art cath labs, electrophysiology suites, cardiac MRI, and hybrid operating suites for minimally invasive valve repairs and coronary artery bypass.",
     icon: "HeartPulse",
+    headDoctor: "Dr. Elena Rostova (Director of Invasive Cardiology)",
+    procedures: [
+      "Percutaneous Coronary Intervention (PCI)",
+      "Transcatheter Aortic Valve Replacement (TAVR)",
+      "Cardiac Electrophysiology & Pacemaker Implantation",
+      "Coronary Artery Bypass Grafting (CABG)",
+    ],
+    commonConditions: [
+      "Coronary Artery Disease",
+      "Heart Failure & Cardiomyopathy",
+      "Atrial Fibrillation & Arrhythmias",
+      "Aortic Aneurysms & Vascular Disease",
+    ],
   },
   {
     id: "dept-3",
-    name: "Pediatrics",
+    name: "Pediatric Care",
+    slug: "pediatrics",
     description:
       "Comprehensive child healthcare, neonatal ICU, and pediatric surgery",
+    longDescription:
+      "Dedicated children's medical center featuring Level IV Neonatal Intensive Care Units (NICU), pediatric emergency care, adolescent medicine, and specialized pediatric surgery in child-friendly environments.",
     icon: "Baby",
+    headDoctor: "Dr. Sophia Patel (Head of Pediatric Medicine)",
+    procedures: [
+      "Neonatal Intensive Care & Surfactant Therapy",
+      "Pediatric Cardiac & Thoracic Surgery",
+      "Pediatric Asthma & Allergy Management",
+      "Childhood Congenital Defect Repair",
+    ],
+    commonConditions: [
+      "Neonatal Respiratory Distress",
+      "Congenital Heart Defects",
+      "Severe Pediatric Asthma",
+      "Pediatric Acute Infections & Fevers",
+    ],
   },
   {
     id: "dept-4",
     name: "Neurology & Neurosurgery",
+    slug: "neurology",
     description:
       "Brain and nervous system diagnostic imaging, stroke intervention",
+    longDescription:
+      "Advanced neuroscience center featuring 3T MRI scanners, neuro-ICUs, and endovascular stroke suites dedicated to treating brain tumors, spinal disorders, epilepsy, stroke, and neuromuscular diseases.",
     icon: "Brain",
+    headDoctor: "Dr. Aris Thorne (Chief of Neurosurgery)",
+    procedures: [
+      "Mechanical Thrombectomy for Ischemic Stroke",
+      "Craniotomy for Brain Tumor Resection",
+      "Endovascular Aneurysm Coiling",
+      "Spinal Decompression & Fusion Surgery",
+    ],
+    commonConditions: [
+      "Acute Ischemic Stroke",
+      "Glioblastoma & Brain Neoplasms",
+      "Epilepsy & Seizure Disorders",
+      "Parkinson's & Movement Disorders",
+    ],
   },
   {
     id: "dept-5",
     name: "Orthopedics",
+    slug: "orthopedics",
     description: "Bone health, joint replacement, sports injury rehabilitation",
+    longDescription:
+      "Leading orthopedic center specializing in robotic-assisted joint replacement surgery, arthroscopic sports medicine, spinal reconstruction, and complex fracture repair.",
     icon: "Activity",
+    headDoctor: "Dr. Jonathan Reyes (Head of Orthopedic Surgery)",
+    procedures: [
+      "Robotic Total Hip & Knee Replacement",
+      "Arthroscopic ACL Reconstruction",
+      "Spinal Lumbar Discectomy",
+      "Complex Fracture Open Reduction",
+    ],
+    commonConditions: [
+      "Osteoarthritis & Joint Degeneration",
+      "Torn Ligaments (ACL/MCL/Rotator Cuff)",
+      "Herniated Spinal Discs",
+      "Complex Bone Fractures",
+    ],
   },
   {
     id: "dept-6",
     name: "Oncology",
+    slug: "oncology",
     description:
       "Radiation therapy, chemotherapy, and surgical oncology treatments",
+    longDescription:
+      "Comprehensive cancer institute offering personalized immunotherapy, precision radiation oncology (Linear Accelerator / Proton Therapy), surgical tumor resection, and multidisciplinary tumor boards.",
     icon: "ShieldAlert",
+    headDoctor: "Dr. Claire Sterling (Director of Clinical Oncology)",
+    procedures: [
+      "Targeted Immunotherapy & Chemotherapy",
+      "Stereotactic Body Radiation Therapy (SBRT)",
+      "Minimally Invasive Tumor Resection",
+      "Bone Marrow & Stem Cell Transplantation",
+    ],
+    commonConditions: [
+      "Breast, Lung, & Colorectal Cancers",
+      "Leukemia & Lymphomas",
+      "Prostate & Urologic Cancers",
+      "Metastatic Solid Tumors",
+    ],
   },
 ];
 

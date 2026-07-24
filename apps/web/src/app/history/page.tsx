@@ -103,6 +103,7 @@ export default function HistoryPage() {
                 <button
                   onClick={handleExportHistory}
                   className="px-3.5 py-2 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold border border-slate-800 transition-all flex items-center gap-1.5"
+                  suppressHydrationWarning
                 >
                   <Download className="w-4 h-4 text-sky-400" />
                   Export JSON Log
@@ -110,6 +111,7 @@ export default function HistoryPage() {
                 <button
                   onClick={handleClearHistory}
                   className="px-3.5 py-2 rounded-2xl bg-red-950/60 hover:bg-red-900 text-red-300 text-xs font-bold border border-red-800/60 transition-all flex items-center gap-1.5 glow-red"
+                  suppressHydrationWarning
                 >
                   <Trash2 className="w-4 h-4" />
                   Clear Log
@@ -169,6 +171,7 @@ export default function HistoryPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search navigation history logs by hospital name..."
             className="w-full bg-slate-900/90 border border-slate-800 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500 backdrop-blur-md"
+            suppressHydrationWarning
           />
         </div>
       )}
@@ -210,7 +213,10 @@ export default function HistoryPage() {
                     {item.durationMins} mins drive
                   </span>
                 </div>
-                <span className="text-[10px] font-bold text-slate-300 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+                <span
+                  className="text-[10px] font-bold text-slate-300 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800"
+                  suppressHydrationWarning
+                >
                   {new Date(item.timestamp).toLocaleString()}
                 </span>
               </div>

@@ -14,9 +14,13 @@ export interface UserProfile {
 export interface Department {
   id: string;
   name: string;
+  slug: string;
   description: string;
+  longDescription?: string;
   icon: string;
   headDoctor?: string;
+  procedures?: string[];
+  commonConditions?: string[];
 }
 
 export interface Doctor {

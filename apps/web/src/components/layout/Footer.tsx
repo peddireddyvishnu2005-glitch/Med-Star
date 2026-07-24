@@ -19,7 +19,7 @@ export default function Footer() {
           </p>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/40 border border-red-800/50 text-red-400 text-xs font-semibold">
             <ShieldAlert className="w-3.5 h-3.5" />
-            National Emergency Hotline: 24/7
+            National Emergency Hotline: 911 / 112
           </div>
         </div>
 
@@ -66,20 +66,44 @@ export default function Footer() {
           </h4>
           <ul className="space-y-2.5 text-sm">
             <li>
-              <span className="hover:text-slate-200">Emergency & Trauma</span>
+              <Link
+                href="/specialties/emergency-trauma"
+                className="hover:text-sky-400 transition-colors"
+              >
+                Emergency & Trauma
+              </Link>
             </li>
             <li>
-              <span className="hover:text-slate-200">
+              <Link
+                href="/specialties/cardiology"
+                className="hover:text-sky-400 transition-colors"
+              >
                 Cardiology & Vascular
-              </span>
+              </Link>
             </li>
             <li>
-              <span className="hover:text-slate-200">Pediatric Care</span>
+              <Link
+                href="/specialties/pediatrics"
+                className="hover:text-sky-400 transition-colors"
+              >
+                Pediatric Care
+              </Link>
             </li>
             <li>
-              <span className="hover:text-slate-200">
+              <Link
+                href="/specialties/neurology"
+                className="hover:text-sky-400 transition-colors"
+              >
                 Neurology & Neurosurgery
-              </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/specialties"
+                className="text-sky-400 font-semibold hover:underline text-xs flex items-center gap-1 pt-1"
+              >
+                Browse All Specialties →
+              </Link>
             </li>
           </ul>
         </div>

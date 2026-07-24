@@ -13,7 +13,8 @@ import {
   LogOut, 
   LogIn, 
   Menu, 
-  X 
+  X,
+  Stethoscope
 } from 'lucide-react';
 import { UserRole } from '@/types';
 
@@ -45,73 +46,85 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 xl:gap-1.5">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5 shrink-0">
             <Link
               href="/"
-              className={`px-3 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                 isActive('/') 
                   ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
               }`}
             >
-              <Building2 className="w-4 h-4 text-sky-400" />
-              Discover
+              <Building2 className="w-4 h-4 text-sky-400 shrink-0" />
+              <span>Discover</span>
             </Link>
 
             <Link
               href="/navigation"
-              className={`px-3 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                 isActive('/navigation') 
                   ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
               }`}
             >
-              <MapPin className="w-4 h-4 text-sky-400" />
-              Live Map & Routing
+              <MapPin className="w-4 h-4 text-sky-400 shrink-0" />
+              <span>Live Map</span>
+            </Link>
+
+            <Link
+              href="/specialties"
+              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
+                isActive('/specialties') || pathname.startsWith('/specialties')
+                  ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
+              }`}
+            >
+              <Stethoscope className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Specialties</span>
             </Link>
 
             <Link
               href="/favorites"
-              className={`px-3 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                 isActive('/favorites') 
                   ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
               }`}
             >
-              <Heart className="w-4 h-4 text-red-400" />
-              Favorites
+              <Heart className="w-4 h-4 text-red-400 shrink-0" />
+              <span>Favorites</span>
             </Link>
 
             <Link
               href="/history"
-              className={`px-3 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                 isActive('/history') 
                   ? 'bg-sky-600/20 text-sky-400 border border-sky-500/40 shadow-sm shadow-sky-500/10' 
                   : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
               }`}
             >
-              <History className="w-4 h-4 text-sky-400" />
-              History
+              <History className="w-4 h-4 text-sky-400 shrink-0" />
+              <span>History</span>
             </Link>
 
             {(role === 'ADMIN' || role === 'SUPER_ADMIN') && (
               <Link
                 href="/admin"
-                className={`px-3 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
+                className={`px-2.5 py-1.5 lg:px-3.5 lg:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   isActive('/admin') 
                     ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/40 shadow-sm shadow-emerald-500/10' 
                     : 'text-emerald-400 hover:bg-emerald-950/30'
                 }`}
               >
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                Admin Portal
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Admin</span>
               </Link>
             )}
           </nav>
 
           {/* User & Role Controls */}
-          <div className="hidden lg:flex items-center gap-2.5">
-            <div className="bg-slate-900/90 border border-slate-800 rounded-xl px-2.5 py-1 flex items-center gap-1.5 backdrop-blur-md">
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
+            <div className="bg-slate-900/90 border border-slate-800 rounded-xl px-2 py-1 flex items-center gap-1.5 backdrop-blur-md whitespace-nowrap shrink-0">
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Role:</span>
               <select
                 value={role}
@@ -127,7 +140,7 @@ export default function Navbar() {
             </div>
 
             {user ? (
-              <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-800 p-1 pl-3 rounded-xl backdrop-blur-md">
+              <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-800 p-1 pl-3 rounded-xl backdrop-blur-md whitespace-nowrap shrink-0">
                 <div className="text-right leading-tight">
                   <p className="text-xs font-bold text-slate-100">{user.displayName}</p>
                   <p className="text-[10px] font-semibold text-sky-400">{user.role}</p>
@@ -136,6 +149,7 @@ export default function Navbar() {
                   onClick={logout}
                   className="p-1.5 rounded-lg bg-slate-950 hover:bg-red-950/60 text-slate-400 hover:text-red-400 border border-slate-800 transition-colors"
                   title="Logout"
+                  suppressHydrationWarning
                 >
                   <LogOut className="w-4 h-4" />
                 </button>
@@ -143,10 +157,11 @@ export default function Navbar() {
             ) : (
               <button
                 onClick={() => loginAs('USER')}
-                className="px-3.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                className="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/20 transition-all flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                suppressHydrationWarning
               >
-                <LogIn className="w-4 h-4" />
-                Sign In
+                <LogIn className="w-4 h-4 shrink-0" />
+                <span>Sign In</span>
               </button>
             )}
           </div>
@@ -156,6 +171,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800/80 transition-colors"
+              suppressHydrationWarning
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -184,6 +200,16 @@ export default function Navbar() {
           >
             <MapPin className="w-4 h-4 text-sky-400" />
             Live Map & Routing
+          </Link>
+          <Link
+            href="/specialties"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              isActive('/specialties') || pathname.startsWith('/specialties') ? 'bg-sky-600/20 text-sky-400 border border-sky-500/30' : 'text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <Stethoscope className="w-4 h-4 text-emerald-400" />
+            Medical Specialties
           </Link>
           <Link
             href="/favorites"
@@ -231,6 +257,7 @@ export default function Navbar() {
                   className={`px-3 py-2 text-xs rounded-xl font-bold border transition-all ${
                     role === r ? 'bg-sky-600 text-white border-sky-500 shadow-md shadow-sky-600/20' : 'bg-slate-900 text-slate-300 border-slate-800 hover:bg-slate-800'
                   }`}
+                  suppressHydrationWarning
                 >
                   {r === 'SUPER_ADMIN' ? 'Super Admin' : r}
                 </button>

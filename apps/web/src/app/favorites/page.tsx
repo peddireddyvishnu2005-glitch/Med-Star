@@ -82,6 +82,7 @@ export default function FavoritesPage() {
             <button
               onClick={() => router.push("/")}
               className="self-start sm:self-auto px-4 py-2.5 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/20 transition-all flex items-center gap-2"
+              suppressHydrationWarning
             >
               <Building2 className="w-4 h-4" />
               Discover More Hospitals
@@ -145,6 +146,7 @@ export default function FavoritesPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search saved hospitals by name or department..."
               className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+              suppressHydrationWarning
             />
           </div>
 
@@ -156,6 +158,7 @@ export default function FavoritesPage() {
                   ? "bg-red-600 text-white border-red-500 shadow-md glow-red"
                   : "bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700"
               }`}
+              suppressHydrationWarning
             >
               <AlertCircle className="w-3.5 h-3.5" />
               24/7 ER Only
@@ -168,6 +171,7 @@ export default function FavoritesPage() {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="bg-transparent text-sky-400 font-bold focus:outline-none cursor-pointer"
+                suppressHydrationWarning
               >
                 <option value="RATING" className="bg-slate-950 text-slate-200">
                   Highest Rating

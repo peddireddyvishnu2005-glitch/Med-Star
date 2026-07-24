@@ -78,6 +78,7 @@ export default function NavigationDrawer({
         <button
           onClick={onClose}
           className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+          suppressHydrationWarning
         >
           <X className="w-5 h-5" />
         </button>
@@ -109,6 +110,7 @@ export default function NavigationDrawer({
               ? "bg-sky-600 text-white shadow-md"
               : "text-slate-400 hover:text-white"
           }`}
+          suppressHydrationWarning
         >
           ⚡ Fastest
         </button>
@@ -119,6 +121,7 @@ export default function NavigationDrawer({
               ? "bg-sky-600 text-white shadow-md"
               : "text-slate-400 hover:text-white"
           }`}
+          suppressHydrationWarning
         >
           📏 Shortest
         </button>
@@ -129,6 +132,7 @@ export default function NavigationDrawer({
               ? "bg-red-600 text-white shadow-md glow-red"
               : "text-red-400 hover:text-white"
           }`}
+          suppressHydrationWarning
         >
           <AlertTriangle className="w-3 h-3" />
           🚑 ER
@@ -181,6 +185,7 @@ export default function NavigationDrawer({
         <button
           onClick={onCompleteNavigation}
           className="flex-1 py-2.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-1.5"
+          suppressHydrationWarning
         >
           <CheckCircle2 className="w-4 h-4" />
           Arrived & Log Session

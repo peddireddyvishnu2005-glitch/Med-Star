@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import DynamicMap from "@/components/map/DynamicMap";
 import HospitalCard from "@/components/hospital/HospitalCard";
 import { INITIAL_HOSPITALS, INITIAL_DEPARTMENTS } from "@/lib/mockData";
@@ -167,7 +168,7 @@ export default function HomePage() {
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-600/90 hover:bg-red-600 text-white text-xs font-bold shadow-lg border border-red-500/40 glow-red transition-all"
             >
               <PhoneCall className="w-3.5 h-3.5 animate-bounce" />
-              Direct Emergency SOS: 24/7
+              Direct Emergency SOS: 911 / 112
             </a>
           </div>
 
@@ -211,6 +212,7 @@ export default function HomePage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search by hospital name, city, or medical specialty..."
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  suppressHydrationWarning
                 />
               </div>
 
@@ -218,6 +220,7 @@ export default function HomePage() {
                 onClick={handleDetectLocation}
                 disabled={isLocating}
                 className="w-full sm:w-auto px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold border border-sky-500 transition-colors flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-sky-600/20"
+                suppressHydrationWarning
               >
                 <Compass
                   className={`w-4 h-4 text-white ${isLocating ? "animate-spin" : ""}`}
@@ -234,6 +237,7 @@ export default function HomePage() {
                     ? "bg-red-600 text-white border-red-500 shadow-lg glow-red"
                     : "bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700"
                 }`}
+                suppressHydrationWarning
               >
                 <AlertCircle className="w-3.5 h-3.5" />
                 🚨 24/7 Emergency Only
@@ -243,6 +247,7 @@ export default function HomePage() {
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
                 className="w-full bg-slate-950 text-slate-300 text-xs font-semibold py-2 px-3 rounded-xl border border-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+                suppressHydrationWarning
               >
                 <option value="ALL">All Cities</option>
                 <option value="Metropolis">Metropolis</option>
@@ -254,6 +259,7 @@ export default function HomePage() {
                 value={selectedDepartment}
                 onChange={(e) => setSelectedDepartment(e.target.value)}
                 className="w-full bg-slate-950 text-slate-300 text-xs font-semibold py-2 px-3 rounded-xl border border-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+                suppressHydrationWarning
               >
                 <option value="ALL">All Specialties</option>
                 {INITIAL_DEPARTMENTS.map((dept) => (
@@ -282,20 +288,22 @@ export default function HomePage() {
               Browse by Specialty Department
             </h2>
             <p className="text-xs text-slate-400">
-              Filter care providers by medical expertise
+              Filter care providers by medical expertise or view dedicated unit pages
             </p>
           </div>
+          <Link
+            href="/specialties"
+            className="text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors shrink-0"
+          >
+            All Specialty Pages →
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
           {INITIAL_DEPARTMENTS.map((dept) => (
-            <button
+            <Link
               key={dept.id}
-              onClick={() =>
-                setSelectedDepartment(
-                  selectedDepartment === dept.name ? "ALL" : dept.name,
-                )
-              }
+              href={`/specialties/${dept.slug}`}
               className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all ${
                 selectedDepartment === dept.name
                   ? "bg-sky-950/90 border-sky-500 text-sky-300 shadow-lg glow-sky"
@@ -308,7 +316,7 @@ export default function HomePage() {
               <p className="text-[10px] text-slate-400 line-clamp-2">
                 {dept.description}
               </p>
-            </button>
+            </Link>
           ))}
         </div>
       </section>
@@ -337,6 +345,7 @@ export default function HomePage() {
                     ? "bg-amber-500 text-slate-950 border-amber-400 shadow-md"
                     : "bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700"
                 }`}
+                suppressHydrationWarning
               >
                 {star === 0 ? "All" : `${star}★+`}
               </button>
@@ -373,6 +382,7 @@ export default function HomePage() {
                 setMinRating(0);
               }}
               className="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold rounded-xl"
+              suppressHydrationWarning
             >
               Reset Filters
             </button>
@@ -409,6 +419,7 @@ export default function HomePage() {
             <button
               onClick={() => router.push("/navigation")}
               className="text-xs font-bold text-sky-300 hover:text-white flex items-center gap-1.5 bg-sky-600 hover:bg-sky-500 px-3.5 py-1.5 rounded-lg shadow-lg shadow-sky-600/20 transition-all"
+              suppressHydrationWarning
             >
               Launch Fullscreen Map
               <ArrowRight className="w-4 h-4" />

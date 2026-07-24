@@ -66,6 +66,7 @@ export default function HospitalDetailPage() {
       <button
         onClick={() => router.back()}
         className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg"
+        suppressHydrationWarning
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Hospitals
@@ -119,6 +120,7 @@ export default function HospitalDetailPage() {
                     ? "bg-red-500/20 border-red-500 text-red-400"
                     : "bg-slate-900/80 border-slate-700 text-slate-300 hover:text-white"
                 }`}
+                suppressHydrationWarning
               >
                 <Heart
                   className={`w-4 h-4 sm:w-5 sm:h-5 ${favorite ? "fill-current" : ""}`}
@@ -128,6 +130,7 @@ export default function HospitalDetailPage() {
               <button
                 onClick={() => router.push("/navigation")}
                 className="flex-1 sm:flex-initial px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-sky-600/30 flex items-center justify-center gap-2"
+                suppressHydrationWarning
               >
                 <Navigation className="w-4 h-4" />
                 Start Turn-by-Turn Navigation

@@ -59,6 +59,7 @@ export default function HospitalCard({
               : "bg-slate-950/70 text-slate-300 hover:text-white border border-white/10 hover:bg-slate-900"
           }`}
           title={favorite ? "Remove from favorites" : "Save to favorites"}
+          suppressHydrationWarning
         >
           <Heart className={`w-4 h-4 ${favorite ? "fill-current" : ""}`} />
         </button>
@@ -176,6 +177,7 @@ export default function HospitalCard({
           <button
             onClick={() => onNavigate(hospital)}
             className="flex-1 py-2.5 px-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg shadow-sky-600/20 transition-all flex items-center justify-center gap-1.5"
+            suppressHydrationWarning
           >
             <Navigation className="w-3.5 h-3.5" />
             Route

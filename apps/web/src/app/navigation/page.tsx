@@ -158,6 +158,7 @@ export default function NavigationPage() {
         <button
           onClick={handleRecenterGps}
           className="flex items-center gap-1 font-bold text-sky-300 hover:text-white bg-sky-950/80 px-2.5 py-1 rounded-full border border-sky-800/60 transition-colors"
+          suppressHydrationWarning
         >
           <Target className="w-3.5 h-3.5" />
           Recenter GPS
@@ -169,6 +170,7 @@ export default function NavigationPage() {
               ? "bg-amber-600 text-white border-amber-500"
               : "bg-slate-950 text-slate-300 border-slate-800 hover:text-white"
           }`}
+          suppressHydrationWarning
         >
           <Play className="w-3.5 h-3.5" />
           {isSimulating ? "Pause Drive" : "Simulate Drive"}
