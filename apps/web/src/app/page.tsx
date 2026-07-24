@@ -167,7 +167,7 @@ export default function HomePage() {
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-600/90 hover:bg-red-600 text-white text-xs font-bold shadow-lg border border-red-500/40 glow-red transition-all"
             >
               <PhoneCall className="w-3.5 h-3.5 animate-bounce" />
-              Direct Emergency SOS: 911 / 112
+              Direct Emergency SOS: 24/7
             </a>
           </div>
 

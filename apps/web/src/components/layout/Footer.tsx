@@ -19,7 +19,7 @@ export default function Footer() {
           </p>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/40 border border-red-800/50 text-red-400 text-xs font-semibold">
             <ShieldAlert className="w-3.5 h-3.5" />
-            National Emergency Hotline: 911 / 112
+            National Emergency Hotline: 24/7
           </div>
         </div>
 
