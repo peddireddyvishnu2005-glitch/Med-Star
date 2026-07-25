@@ -18,6 +18,9 @@
     "lint": "npm run lint --workspace=apps/web",
     "test": "npm run test --workspace=apps/web"
   },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.12"
+  },
   "keywords": [
     "healthcare",
     "hospital-finder",
