@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { MedStarIcon } from '@/components/ui/MedStarIcon';
 import { 
   Building2, 
   MapPin, 
@@ -62,9 +63,7 @@ export default function Navbar() {
 
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-cyan-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
-              <Building2 className="w-5 h-5 text-white" />
-            </div>
+            <MedStarIcon size="md" glow={true} className="group-hover:scale-105 transition-transform" />
             <div className="flex items-center gap-2">
               <span className="text-xl font-extrabold bg-gradient-to-r from-white via-sky-100 to-sky-400 bg-clip-text text-transparent tracking-tight">
                 MedStart

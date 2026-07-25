@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'MedStart — Enterprise Hospital Finder & Turn-by-Turn Navigation Platform',
   description: 'Intelligent Hospital Finder, Real-Time Emergency Availability, and Turn-by-Turn Navigation Platform.',
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
