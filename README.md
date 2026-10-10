@@ -15,7 +15,7 @@
 
 **MedStart** is an enterprise-grade, high-availability healthcare directory and turn-by-turn navigation system designed to connect emergency patients with verified medical centers, real-time ICU bed availability, and specialty doctors in under 3 taps.
 
-[Explore Documentation](docs/README.md) · [View API Specs](#-rest-api-documentation) · [Report Bug](https://github.com/bunnyvalluri/Med-Start/issues)
+[Explore Documentation](docs/README.md) · [View API Specs](#-rest-api-documentation) · [Report Bug](https://github.com/peddireddyvishnu2005-glitch/Med-Star/issues)
 
 ---
 
@@ -128,8 +128,8 @@ The project includes **25 detailed specification documents** inside the [`/docs`
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/bunnyvalluri/Med-Start.git
-   cd Med-Start
+   git clone https://github.com/peddireddyvishnu2005-glitch/Med-Star.git
+   cd Med-Star
    ```
 
 2. **Run Web Application (Frontend)**:
